@@ -4,13 +4,11 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { navItems } from '@/lib/constants/navItems';
 
 export function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);  const navItems = [
-    { name: 'Tentang', href: '/about' },
-    { name: 'Kontak', href: '/#contact' },
-  ];
-
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);  
+  
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
       e.preventDefault();
@@ -22,7 +20,8 @@ export function Navbar() {
     }
   };
 
-  return (    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-sm dark:border-border">
+  return (    
+  <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-sm dark:border-border">
       <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-4 lg:px-6">
         <div className="flex items-center gap-3">
           <Link href="/">
@@ -65,7 +64,8 @@ export function Navbar() {
       </div>
 
       <AnimatePresence>
-        {isMobileMenuOpen && (          <motion.div
+        {isMobileMenuOpen && (         
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}

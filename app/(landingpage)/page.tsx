@@ -12,9 +12,6 @@ import {
 import { Badge } from "@/components/ui/badge";
 import {
   RiArrowRightLine,
-  RiEyeLine,
-  RiTeamLine,
-  RiStarFill,
 } from "react-icons/ri";
 import { Target, Eye, BarChart3, Users } from "lucide-react";
 import { FaqSection } from "@/components/faq-section";
@@ -23,37 +20,17 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-
-
-const socialAidTestimonials = [
-  {
-    quote: "BISA membantu kami mengidentifikasi penerima bantuan yang tepat dengan akurasi 95%. Data yang komprehensif membuat distribusi bantuan jauh lebih efektif.",
-    name: "Dr. Siti Nurhaliza",
-    role: "Kepala Dinas Sosial, Jawa Barat"
-  },
-  {
-    quote: "Platform ini mengubah cara kami mengelola program bantuan sosial. Transparansi dan akuntabilitas meningkat drastis sejak menggunakan BISA.",
-    name: "Bambang Sutrisno",
-    role: "Direktur Bantuan Sosial, Kemensos"
-  },
-  {
-    quote: "Dengan BISA, kami dapat memonitor distribusi bantuan secara real-time dan memastikan tidak ada yang terlewat dari sasaran.",
-    name: "Ir. Maya Sari",
-    role: "Kepala BPBD, DKI Jakarta"
-  },
-  {
-    quote: "Sistem AI yang canggih membantu kami mengoptimalkan alokasi anggaran bantuan sosial dengan data yang akurat dan terpercaya.",
-    name: "Prof. Dr. Ahmad Fauzi",
-    role: "Kepala Bappeda, Jawa Timur"
-  }
-];
+import { socialAidTestimonials } from "@/lib/constants/socialTestimonials";
+import { features } from "@/lib/constants/featureLanding";
+import { featureUnggulan } from "@/lib/constants/fiturUnggulan";
+import { bisaBekerja } from "@/lib/constants/bisaBekerja";
+import { techstack } from "@/lib/constants/techStack";
+import { stats } from "@/lib/constants/stats";
 
 export default function Home() {
-
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-1 px-5">
-        {/* Hero Section */}
         <section className="relative overflow-hidden py-20 md:py-25">
           <BackgroundGradient
             animate={true}
@@ -62,7 +39,6 @@ export default function Home() {
           />
           <div className="container relative z-10 mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Column 1 - Content */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -102,7 +78,6 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Column 2 - Hero Image */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -110,7 +85,6 @@ export default function Home() {
                 className="relative"
               >
                 <div className="relative aspect-square w-full max-w-lg mx-auto">
-                  {/* Floating elements untuk visual appeal */}
                   <div className="absolute -top-4 -left-4 w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full opacity-20 animate-pulse"></div>
                   <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-20 animate-pulse delay-1000"></div>
                   <div className="absolute top-1/2 -left-8 w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 animate-bounce"></div>
@@ -123,11 +97,9 @@ export default function Home() {
                     priority
                   />
                   
-                  {/* Glass effect overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-white/5 rounded-lg"></div>
                 </div>
                 
-                {/* Floating info cards */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -149,7 +121,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 1.0 }}
-                  className="absolute -top-6 -right-6 bg-white rounded-lg shadow-xl p-4 border border-gray-100"
+                  className="absolute -top-6 -right-3 bg-white rounded-lg shadow-xl p-4 border border-gray-100"
                 >
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
@@ -166,9 +138,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section - Enhanced */}
         <section id="features" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
-          {/* Background decorations */}
           <div className="absolute top-0 left-0 w-full h-full">
             <div className="absolute top-20 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
             <div className="absolute top-40 right-10 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
@@ -194,58 +164,38 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                {
-                  icon: <Target className="w-6 h-6 text-green-600" />,
-                  title: "Targeting Akurat",
-                  description: "AI menganalisis data untuk memastikan bantuan tepat sasaran sesuai kriteria penerima.",
-                  color: "bg-green-100",
-                  stats: "95% Akurasi"
-                },
-                {
-                  icon: <Eye className="w-6 h-6 text-blue-600" />,
-                  title: "Pemantauan Real-time",
-                  description: "Sistem tracking real-time untuk memantau distribusi bantuan dari awal hingga akhir dengan transparansi penuh.",
-                  color: "bg-blue-100",
-                  stats: "24/7 Monitoring"
-                },
-                {
-                  icon: <BarChart3 className="w-6 h-6 text-blue-600" />,
-                  title: "Analisis Mendalam",
-                  description: "Dashboard analitik komprehensif untuk evaluasi efektivitas program bantuan sosial dan prediksi kebutuhan.",
-                  color: "bg-blue-100",
-                  stats: "20+ Metrics"
-                },
-                {
-                  icon: <Users className="w-6 h-6 text-green-600" />,
-                  title: "Kolaborasi Multi-Instansi",
-                  description: "Platform terintegrasi untuk koordinasi antar instansi dalam pengelolaan bantuan dengan workflow yang efisien.",
-                  color: "bg-green-100",
-                  stats: "Multi-Level Access"
-                }
-              ].map((feature, index) => (
+              {features.map(({ icon: Icon, title, description, color, stats }, index) => (
                 <motion.div
-                  key={index}
+                  key={title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
                   <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 h-full group bg-white/80 backdrop-blur-sm hover:bg-white relative overflow-hidden">
-                    {/* Animated background gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <CardContent className="p-8 text-center h-full flex flex-col relative z-10">
-                      <div className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg`}>
-                        {feature.icon}
+                      <div
+                        className={`w-16 h-16 ${color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg`}
+                      >
+                        <Icon
+                          className={`w-6 h-6 ${
+                            color.includes("green") ? "text-green-600" : "text-blue-600"
+                          }`}
+                        />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-700 transition-colors duration-300">{feature.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-700 transition-colors duration-300">
+                        {title}
+                      </h3>
                       <p className="text-gray-600 text-base leading-relaxed flex-grow mb-6">
-                        {feature.description}
+                        {description}
                       </p>
                       <div className="mt-auto">
-                        <Badge variant="secondary" className="text-sm px-4 py-2 bg-blue-50 text-blue-700 group-hover:bg-blue-100 transition-colors duration-300">
-                          {feature.stats}
+                        <Badge
+                          variant="secondary"
+                          className="text-sm px-4 py-2 bg-blue-50 text-blue-700 group-hover:bg-blue-100 transition-colors duration-300"
+                        >
+                          {stats}
                         </Badge>
                       </div>
                     </CardContent>
@@ -254,7 +204,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Additional Features Grid */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -262,38 +211,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {[
-                {
-                  title: "Keamanan Data Terjamin",
-                  description: "Enkripsi end-to-end dan compliance dengan standar keamanan pemerintah",
-                  icon: "🔒"
-                },
-                {
-                  title: "Integrasi Mudah",
-                  description: "API yang fleksibel untuk integrasi dengan sistem yang sudah ada",
-                  icon: "🔗"
-                },
-                {
-                  title: "Laporan Otomatis",
-                  description: "Generate laporan komprehensif secara otomatis untuk akuntabilitas",
-                  icon: "📊"
-                },
-                {
-                  title: "Support 24/7",
-                  description: "Tim teknis siap membantu implementasi dan troubleshooting",
-                  icon: "🛟"
-                },
-                {
-                  title: "Machine Learning",
-                  description: "Algoritma yang terus belajar untuk meningkatkan akurasi targeting",
-                  icon: "🧠"
-                },
-                {
-                  title: "Mobile Ready",
-                  description: "Akses dari berbagai device untuk mobilitas petugas lapangan",
-                  icon: "📱"
-                }
-              ].map((item, index) => (
+              {featureUnggulan.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -315,7 +233,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How It Works Section */}
         <section id="how-it-works" className="py-20 bg-white relative">
           <div className="container max-w-6xl">
             <motion.div
@@ -337,29 +254,7 @@ export default function Home() {
             </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  step: "01",
-                  title: "Data Collection & Analysis",
-                  description: "AI mengumpulkan dan menganalisis data demografis, ekonomi, dan sosial dari berbagai sumber untuk mendapatkan gambaran komprehensif masyarakat",
-                  icon: "📊",
-                  color: "from-blue-500 to-blue-700"
-                },
-                {
-                  step: "02", 
-                  title: "Smart Targeting & Classification",
-                  description: "Algoritma machine learning mengklasifikasikan dan memprioritaskan calon penerima bantuan berdasarkan tingkat kebutuhan dan kriteria yang ditetapkan",
-                  icon: "🎯",
-                  color: "from-purple-500 to-purple-700"
-                },
-                {
-                  step: "03",
-                  title: "Distribution & Monitoring",
-                  description: "Sistem memantau proses distribusi secara real-time dan memberikan laporan transparan serta feedback untuk perbaikan berkelanjutan",
-                  icon: "📱",
-                  color: "from-green-500 to-green-700"
-                }
-              ].map((item, index) => (
+              {bisaBekerja.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -370,15 +265,12 @@ export default function Home() {
                 >
                   
                   <div className="relative z-10 text-center">
-                    {/* Step Number */}
                     <div className={`w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
                       {item.step}
                     </div>
                     
-                    {/* Icon */}
                     <div className="text-4xl mb-4">{item.icon}</div>
-                    
-                    {/* Content */}
+                  
                     <h3 className="text-xl font-bold text-gray-900 mb-4">{item.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{item.description}</p>
                   </div>
@@ -386,7 +278,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Tech Stack Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -396,7 +287,7 @@ export default function Home() {
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-8">Teknologi yang Digunakan</h3>
               <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-                {["Machine Learning", "Big Data Analytics", "Cloud Computing", "API Integration", "Real-time Monitoring", "Data Security"].map((tech, index) => (
+                {techstack.map((tech, index) => (
                   <div key={index} className="bg-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700">
                     {tech}
                   </div>
@@ -406,7 +297,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonial Section */}
         <section className="py-20 relative">
           <div className="absolute inset-0 bg-primary/5 transform skew-y-3"></div>
           <div className="container relative z-10">
@@ -436,7 +326,6 @@ export default function Home() {
               />
             </div>
 
-            {/* Stats Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -444,12 +333,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
             >
-              {[
-                { number: "50+", label: "Instansi Pemerintah", icon: "🏛️", color: "from-blue-500 to-blue-700" },
-                { number: "2.5M+", label: "Penerima Bantuan", icon: "👥", color: "from-green-500 to-green-700" },
-                { number: "95%", label: "Tingkat Akurasi", icon: "🎯", color: "from-purple-500 to-purple-700" },
-                { number: "30%", label: "Efisiensi Peningkatan", icon: "📈", color: "from-orange-500 to-orange-700" }
-              ].map((stat, index) => (
+              {stats.map((stat, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -559,7 +443,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Quick Stats */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -581,7 +464,6 @@ export default function Home() {
                 </motion.div>
               </motion.div>
 
-              {/* Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -706,7 +588,6 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Additional Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -740,7 +621,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="py-20">
           <div className="container">
             <motion.div
