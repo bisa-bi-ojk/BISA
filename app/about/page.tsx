@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Footer } from "@/components/footer";
+import { techUsed } from "@/lib/constants/about/techUsed";
+import { mission } from "@/lib/constants/about/mission";
 
 export default function About() {
   return (
@@ -80,28 +82,7 @@ export default function About() {
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {[
-                {
-                  icon: "/AI Icon Container.png",
-                  title: "AI Prediksi",
-                  description: "Algoritma machine learning yang menganalisis pola data historis untuk memprediksi kebutuhan bantuan di berbagai wilayah dengan akurasi tinggi."
-                },
-                {
-                  icon: "/Satellite Icon Container.png",
-                  title: "Citra Satelit",
-                  description: "Teknologi pemrosesan citra satelit untuk memantau kondisi geografis dan demografis wilayah, membantu identifikasi area prioritas bantuan."
-                },
-                {
-                  icon: "/PLN Icon Container.png",
-                  title: "Analisis Tagihan Listrik",
-                  description: "Integrasi dengan data PLN untuk menganalisis pola konsumsi listrik sebagai indikator tingkat ekonomi rumah tangga dan kebutuhan bantuan."
-                },
-                {
-                  icon: "/Dashboard Icon Container.png",
-                  title: "Dashboard Visual",
-                  description: "Interface interaktif dengan visualisasi data real-time, memungkinkan pengambil keputusan memantau dan mengevaluasi efektivitas program bantuan."
-                }
-              ].map((tech, index) => (
+              {techUsed.map((tech, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -211,12 +192,7 @@ export default function About() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              {[
-                "Meningkatkan akurasi targeting penerima bantuan sosial hingga 95%",
-                "Mengurangi waktu proses distribusi bantuan dari bulan menjadi hari",
-                "Menciptakan transparansi penuh dalam setiap tahap distribusi bantuan",
-                "Membangun ekosistem data terintegrasi untuk program bantuan sosial nasional"
-              ].map((mission, index) => (
+              {mission.map((mission, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}

@@ -20,12 +20,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import { socialAidTestimonials } from "@/lib/constants/socialTestimonials";
-import { features } from "@/lib/constants/featureLanding";
-import { featureUnggulan } from "@/lib/constants/fiturUnggulan";
-import { bisaBekerja } from "@/lib/constants/bisaBekerja";
-import { techstack } from "@/lib/constants/techStack";
-import { stats } from "@/lib/constants/stats";
+import { socialAidTestimonials } from "@/lib/constants/landing_page/socialTestimonials";
+import { features } from "@/lib/constants/landing_page/featureLanding";
+import { featureUnggulan } from "@/lib/constants/landing_page/fiturUnggulan";
+import { bisaBekerja } from "@/lib/constants/landing_page/bisaBekerja";
+import { techstack } from "@/lib/constants/landing_page/techStack";
+import { stats } from "@/lib/constants/landing_page/stats";
 
 export default function Home() {
   return (

@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { faqData } from "@/lib/constants/faqData";
+import { faqData } from "@/lib/constants/landing_page/faqData";
 
 export function FaqSection() {
   return (
