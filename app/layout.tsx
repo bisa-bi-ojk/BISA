@@ -31,10 +31,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "---BISA---",
-  description: "---",
+  title: "BISA",
+  description: "Bantuan",
   icons: {
-    icon : "icons8-sale-16 (1).png"
+    icon : "Logo.png"
   }
 };
 
@@ -52,16 +52,16 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        <ThemeProvider
+        {/* <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >
+        > */}
           <Navbar />
           {children}
           <Toaster />
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

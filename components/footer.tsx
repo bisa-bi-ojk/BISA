@@ -1,60 +1,64 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import {
-    RiFacebookFill,
-    RiInstagramFill,
-    RiLinkedinFill,
-    RiGithubFill,
-} from 'react-icons/ri';
 
 export function Footer() {
-    return (
-    <footer className="border-t bg-background">
-        <div className="container py-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="flex items-center space-x-2">
-                Sales Order Generator
-                </motion.div>
+    return (        <footer className="bg-[#24649F] text-white py-12">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div className="col-span-1">
+                        <div className="flex items-center gap-3 mb-4">
+                            <img 
+                                src="/Logo.png"
+                                alt="BISA Logo"
+                                className="h-10 w-auto filter brightness-0 invert"
+                            />
+                            <div>
+                                <h3 className="text-xl font-bold">BISA</h3>
+                                <p className="text-sm text-gray-300">Bantuan Inklusif & Sasaran Akurat</p>
+                            </div>
+                        </div>
+                        <p className="text-gray-300 mb-4">
+                            Platform AI untuk distribusi bantuan sosial yang tepat sasaran.
+                        </p>
+                    </div>                 
+                    <div>
+                        <h4 className="font-semibold mb-4">Platform</h4>
+                        <ul className="space-y-2">
+                            <li><Link href="#features" className="text-gray-300 hover:text-white">Fitur Utama</Link></li>
+                            <li><Link href="/dashboard" className="text-gray-300 hover:text-white">Dashboard</Link></li>
+                            <li><Link href="/about" className="text-gray-300 hover:text-white">Tentang Kami</Link></li>
+                        </ul>
+                    </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex gap-6"
-                >
-                    <Link
-                    href="https://github.com/anthef/sales-order-generator"
-                    target="_blank"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                    >
-                    <RiGithubFill className="inline-block mr-1 size-4" />
-                    Repository
-                    </Link>
-                </motion.div>
+                    <div>
+                        <h4 className="font-semibold mb-4">Dukungan</h4>
+                        <ul className="space-y-2">
+                            <li><Link href="#faq" className="text-gray-300 hover:text-white">FAQ</Link></li>
+                            <li><Link href="#guide" className="text-gray-300 hover:text-white">Panduan</Link></li>
+                            <li><Link href="#support" className="text-gray-300 hover:text-white">Support</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Contact */}
+                    <div>
+                        <h4 className="font-semibold mb-4">Kontak</h4>
+                        <ul className="space-y-2 text-gray-300">
+                            <li>info@bisa.go.id</li>
+                            <li>+62 21 1234 5678</li>
+                            <li>Jakarta, Indonesia</li>
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Bottom Section */}
+                <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+                    <p className="text-gray-400">
+                        © 2025 BISA Platform. Dikembangkan untuk Pemerintah Indonesia.
+                    </p>
+                </div>
             </div>
-
-            <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="mt-8 border-t pt-8 text-center"
-            >
-            <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Anthony. All rights reserved.
-            </p>
-        </motion.div>
-        </div>
-    </footer>
+        </footer>
     );
 }
 
