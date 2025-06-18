@@ -54,7 +54,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <main className="flex-1 px-5">
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-20 md:py-32">
+        <section className="relative overflow-hidden py-20 md:py-25">
           <BackgroundGradient
             animate={true}
             className="opacity-20"
@@ -99,10 +99,6 @@ export default function Home() {
                       <RiArrowRightLine className="ml-2 h-5 w-5" />
                     </ShineButton>
                   </Link>
-                  <Button variant="outline" size="lg" className="h-14 px-10 bg-white/90 backdrop-blur-sm hover:bg-white border-2 border-gray-200 hover:border-gray-300 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                    <RiEyeLine className="mr-2 h-5 w-5" />
-                    Lihat Demo
-                  </Button>
                 </div>
               </motion.div>
 

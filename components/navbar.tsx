@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);  const navItems = [
     { name: 'Tentang', href: '/about' },
-    { name: 'Kontak', href: '#contact' },
+    { name: 'Kontak', href: '/#contact' },
   ];
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -25,18 +25,21 @@ export function Navbar() {
   return (    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-sm dark:border-border">
       <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-4 lg:px-6">
         <div className="flex items-center gap-3">
+          <Link href="/">
           <img 
             src="/Logo.png"
             alt="BISA Logo"
             className="h-10 w-auto dark:filter dark:brightness-0 dark:invert"
           />
+          </Link>
           <div className="hidden sm:block">
             <h2 className="text-xl font-bold text-foreground">BISA</h2>
             <p className="text-xs text-muted-foreground">Bantuan Inklusif & Sasaran Akurat</p>
           </div>
         </div>        
-        <div className="flex items-center gap-4">
-           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+        <div className="flex items-center gap-6">
+
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {navItems.map((item) => (
             <Link
               key={item.name}

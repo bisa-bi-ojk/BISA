@@ -9,12 +9,10 @@ import { Footer } from "@/components/footer";
 export default function About() {
   return (
     <div className="flex min-h-screen flex-col">
-      <main className="flex-1 pt-16">
-        {/* Section 1: Apa itu BISA? */}
+      <main className="flex-1 pt-3">
         <section className="py-20 bg-background">
           <div className="container max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Column 1 - Content */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -64,7 +62,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Section 2: Teknologi yang Digunakan */}
         <section className="py-20 bg-muted/50">
           <div className="container max-w-6xl">
             <motion.div
@@ -136,7 +133,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Section 3: Didukung Oleh */}
         <section className="py-20 bg-background">
           <div className="container max-w-4xl">
             <motion.div
@@ -191,7 +187,6 @@ export default function About() {
           </div>
         </section>
 
-        {/* Section 4: Misi Kami */}
         <section className="py-20 bg-muted/50">
           <div className="container max-w-4xl">
             <motion.div
