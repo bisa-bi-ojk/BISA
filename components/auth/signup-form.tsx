@@ -36,14 +36,12 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
       confirmPassword: ""
     }
 
-    // Full name validation
     if (!formData.fullName.trim()) {
       newErrors.fullName = "Nama lengkap harus diisi"
     } else if (formData.fullName.trim().length < 2) {
       newErrors.fullName = "Nama lengkap minimal 2 karakter"
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!formData.email) {
       newErrors.email = "Email harus diisi"
@@ -51,7 +49,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
       newErrors.email = "Format email tidak valid"
     }
 
-    // Phone validation
     const phoneRegex = /^(\+62|62|0)[0-9]{9,13}$/
     if (!formData.phone) {
       newErrors.phone = "Nomor telepon harus diisi"
@@ -59,7 +56,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
       newErrors.phone = "Format nomor telepon tidak valid"
     }
 
-    // Password validation
     if (!formData.password) {
       newErrors.password = "Password harus diisi"
     } else if (formData.password.length < 8) {
@@ -82,7 +78,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
     
-    // Clear error when user starts typing
     if (errors[field as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [field]: "" }))
     }
@@ -98,7 +93,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full gap-5">
-      {/* Global Error */}
       {error && (
         <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
           <AlertCircle className="w-5 h-5 text-red-500" />
@@ -106,7 +100,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
         </div>
       )}
 
-      {/* Full Name Field */}
       <div className="flex flex-col gap-2">
         <label htmlFor="fullName" className="font-medium text-sm text-gray-700">
           Nama Lengkap
@@ -131,7 +124,7 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
         )}
       </div>
 
-      {/* Email Field */}
+
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="font-medium text-sm text-gray-700">
           Email
@@ -156,7 +149,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
         )}
       </div>
 
-      {/* Phone Field */}
       <div className="flex flex-col gap-2">
         <label htmlFor="phone" className="font-medium text-sm text-gray-700">
           Nomor Telepon
@@ -181,7 +173,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
         )}
       </div>
 
-      {/* Password Field */}
       <div className="flex flex-col gap-2">
         <label htmlFor="password" className="font-medium text-sm text-gray-700">
           Password
@@ -218,7 +209,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
         )}
       </div>
 
-      {/* Confirm Password Field */}
       <div className="flex flex-col gap-2">
         <label htmlFor="confirmPassword" className="font-medium text-sm text-gray-700">
           Konfirmasi Password
@@ -255,7 +245,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
         )}
       </div>
 
-      {/* Terms Agreement */}
       <div className="flex items-start gap-3">
         <Checkbox id="terms" className="w-4 h-4 border-gray-300 mt-1" required disabled={isLoading} />
         <label htmlFor="terms" className="text-sm text-gray-500 leading-relaxed">
@@ -270,7 +259,6 @@ export function SignupForm({ onSubmit, isLoading = false, error }: SignupFormPro
         </label>
       </div>
 
-      {/* Sign Up Button */}
       <Button 
         type="submit"
         className="w-full h-12 bg-[#3e9edb] hover:bg-[#3589c2] text-white rounded-lg shadow-[0px_4px_12px_#3e9edb40] flex items-center justify-center gap-2 mt-2"
