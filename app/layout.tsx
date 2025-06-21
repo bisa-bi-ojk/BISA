@@ -6,6 +6,7 @@ import { Poppins, Montserrat } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
+import { AuthProvider } from "@/hooks/use-auth";
 
 
 const fontSans = Poppins({
@@ -58,9 +59,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         > */}
-          <Navbar />
-          {children}
-          <Toaster />
+          <AuthProvider>
+            <Navbar />
+            {children}
+            <Toaster />
+          </AuthProvider>
         {/* </ThemeProvider> */}
       </body>
     </html>

@@ -5,9 +5,13 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { navItems } from '@/lib/constants/landing_page/navItems';
+import { useAuth } from '@/hooks/use-auth';
+import { logout as apiLogout } from '@/lib/api/auth';
+import { Menu, X, User } from 'lucide-react';
 
 export function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);  
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, isLoggedIn, logout } = useAuth();
   
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
@@ -17,6 +21,17 @@ export function Navbar() {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
       setIsMobileMenuOpen(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await apiLogout();
+      logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Even if API fails, logout locally
+      logout();
     }
   };
 
@@ -35,8 +50,7 @@ export function Navbar() {
             <h2 className="text-xl font-bold text-foreground">BISA</h2>
             <p className="text-xs text-muted-foreground">Bantuan Inklusif & Sasaran Akurat</p>
           </div>
-        </div>        
-        <div className="flex items-center gap-6">
+        </div>          <div className="flex items-center gap-6">
 
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {navItems.map((item) => (
@@ -52,13 +66,45 @@ export function Navbar() {
           ))}
         </nav>
 
-          <Link href="/login" className="hidden sm:block">
-            <Button 
-              className="bg-[#3E9EDB] hover:bg-[#2E7BC6] text-white font-medium px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-            >
-              Login
-            </Button>
-          </Link>
+          {/* Desktop Auth Section */}
+          <div className="hidden sm:flex items-center gap-4">
+            {isLoggedIn ? (
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg">
+                  <User className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-sm font-medium">{user?.fullName}</span>
+                </div>
+                <Button 
+                  onClick={handleLogout}
+                  variant="outline"
+                  className="font-medium px-4 py-2 rounded-lg border-[#3E9EDB] text-[#3E9EDB] hover:bg-[#3E9EDB] hover:text-white transition-all duration-300"
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Link href="/login">
+                <Button 
+                  className="bg-[#3E9EDB] hover:bg-[#2E7BC6] text-white font-medium px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                >
+                  Login
+                </Button>
+              </Link>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
+          </button>
           
         </div>
       </div>
@@ -87,21 +133,39 @@ export function Navbar() {
                     {item.name}
                   </Link>
                 </motion.div>
-              ))}
-              <motion.div
+              ))}              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
                 className="pt-3 border-t border-border"
               >
-                <Link href="/login" className="block">
-                  <Button 
-                    className="w-full bg-[#3E9EDB] hover:bg-[#2E7BC6] text-white font-medium py-3 rounded-lg shadow-md"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Login
-                  </Button>
-                </Link>
+                {isLoggedIn ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 px-4 py-2 bg-muted rounded-lg">
+                      <User className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-sm font-medium">{user?.fullName}</span>
+                    </div>
+                    <Button 
+                      onClick={() => {
+                        handleLogout();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      variant="outline"
+                      className="w-full font-medium py-3 rounded-lg border-[#3E9EDB] text-[#3E9EDB] hover:bg-[#3E9EDB] hover:text-white transition-all duration-300"
+                    >
+                      Logout
+                    </Button>
+                  </div>
+                ) : (
+                  <Link href="/login" className="block">
+                    <Button 
+                      className="w-full bg-[#3E9EDB] hover:bg-[#2E7BC6] text-white font-medium py-3 rounded-lg shadow-md"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                )}
               </motion.div>
             </div>
           </motion.div>

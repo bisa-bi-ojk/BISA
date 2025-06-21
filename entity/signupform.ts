@@ -8,4 +8,5 @@ export interface SignupFormProps {
   }) => void | Promise<void>
   isLoading?: boolean
   error?: string
+  success?: string
 }

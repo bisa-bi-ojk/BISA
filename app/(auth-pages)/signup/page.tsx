@@ -3,14 +3,18 @@
 import { ArrowLeft, ShieldCheck } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { SignupForm } from "@/components/auth/signup-form"
+import { register } from "@/lib/api/auth"
 
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const router = useRouter()
 
   const handleSignUp = async (formData: {
     fullName: string
@@ -22,16 +26,20 @@ export default function SignUpPage() {
     try {
       setIsLoading(true)
       setError("")
+      setSuccess("")
       
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      const response = await register({
+        ...formData,
+        role: 'citizen' // Default role for regular users
+      })
       
-      if (formData.email === "test@exist.com") {
-        throw new Error("Email sudah terdaftar")
-      }
+      console.log("Registration successful:", response)
+      setSuccess(response.message)
       
-      console.log("Sign up attempt with:", formData)
-      alert("Pendaftaran berhasil! Silakan check email untuk verifikasi.")
-      
+      // Redirect to login page after successful registration
+      setTimeout(() => {
+        router.push('/login')
+      }, 3000)
       
     } catch (error) {
       console.error("Signup error:", error)
@@ -69,11 +77,11 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          <div className="w-full max-w-[384px]">
-            <SignupForm 
+          <div className="w-full max-w-[384px]">            <SignupForm 
               onSubmit={handleSignUp}
               isLoading={isLoading}
               error={error}
+              success={success}
             />
           </div>
 

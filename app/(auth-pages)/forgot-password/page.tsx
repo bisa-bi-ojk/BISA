@@ -6,19 +6,31 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { ForgotPasswordForm } from "@/components/auth/forgot-password-form"
+import { forgotPassword } from "@/lib/api/auth"
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("")
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Password reset request for:", email)
-    setIsSubmitted(true)
-    setTimeout(() => {
-      alert("Link reset password telah dikirim ke email Anda!")
-    }, 1000)
+  const handleForgotPassword = async (email: string) => {
+    try {
+      setIsLoading(true)
+      setError("")
+      setSuccess("")
+      
+      const response = await forgotPassword({ email })
+      
+      console.log("Password reset request successful:", response)
+      setSuccess(response.message)
+      
+    } catch (error) {
+      console.error("Forgot password error:", error)
+      setError(error instanceof Error ? error.message : "Terjadi kesalahan saat mengirim email reset")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -47,64 +59,14 @@ export default function ForgotPasswordPage() {
                 Jangan khawatir! Masukkan email Anda dan kami akan mengirimkan link untuk reset password
               </p>
             </div>
+          </div>          <div className="w-full max-w-[384px]">
+            <ForgotPasswordForm 
+              onSubmit={handleForgotPassword}
+              isLoading={isLoading}
+              error={error}
+              success={success}
+            />
           </div>
-
-          {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-[384px] gap-6">
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="email"
-                  className="font-medium text-sm text-gray-700 [font-family:'Inter-Medium',Helvetica]"
-                >
-                  Email
-                </label>
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                    <Mail className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-12 h-14 text-base [font-family:'Inter-Regular',Helvetica]"
-                    placeholder="Masukkan email terdaftar"
-                    required
-                  />
-                </div>
-              </div>
-
-              <Button 
-                type="submit"
-                className="w-full h-14 bg-[#3e9edb] hover:bg-[#3589c2] text-white rounded-lg shadow-[0px_4px_12px_#3e9edb40] flex items-center justify-center gap-2"
-              >
-                <Send className="w-5 h-5" />
-                <span className="font-semibold text-base [font-family:'Inter-SemiBold',Helvetica]">
-                  Kirim Link Reset
-                </span>
-              </Button>
-            </form>
-          ) : (
-            <div className="flex flex-col w-full max-w-[384px] items-center gap-6">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                <Send className="w-8 h-8 text-green-600" />
-              </div>
-              <div className="text-center">
-                <h3 className="font-semibold text-lg text-gray-900 mb-2">Email Terkirim!</h3>
-                <p className="text-sm text-gray-500 [font-family:'Inter-Regular',Helvetica]">
-                  Kami telah mengirimkan link reset password ke <strong>{email}</strong>. 
-                  Silakan cek inbox atau folder spam Anda.
-                </p>
-              </div>
-              <Button 
-                onClick={() => setIsSubmitted(false)}
-                variant="outline"
-                className="w-full h-12"
-              >
-                Kirim Ulang
-              </Button>
-            </div>
-          )}
 
           <div className="flex flex-col w-full max-w-[384px] items-center gap-4">
             <div className="flex items-center gap-2">

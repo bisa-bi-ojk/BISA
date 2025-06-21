@@ -3,29 +3,35 @@
 import { ArrowLeft, ShieldCheck } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { LoginForm } from "@/components/auth/login-form"
+import { login } from "@/lib/api/auth"
+import { useAuth } from "@/hooks/use-auth"
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const router = useRouter()
+  const { login: setAuthUser } = useAuth()
 
   const handleLogin = async (email: string, password: string) => {
     try {
       setIsLoading(true)
       setError("")
       
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      const response = await login({ email, password })
       
-      if (email === "test@error.com") {
-        throw new Error("Email atau password salah")
-      }
+      // Set user in context
+      setAuthUser(response.user)
       
-      console.log("Login attempt with:", { email, password })
-      alert("Login berhasil! Redirecting to dashboard...")
+      console.log("Login successful:", response.user)
+      
+      // Redirect to dashboard or home page
+      router.push('/dashboard') // Change this to your desired redirect path
       
     } catch (error) {
       console.error("Login error:", error)

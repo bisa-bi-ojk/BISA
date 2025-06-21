@@ -1,45 +1,58 @@
 'use client';
 
-import { EyeOff, Lock, Eye, ArrowLeft, CheckCircle } from "lucide-react"
-import { useState } from "react"
+import { ArrowLeft, CheckCircle } from "lucide-react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter, useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { ResetPasswordForm } from "@/components/auth/reset-password-form"
+import { resetPassword } from "@/lib/api/auth"
 
 export default function ResetPasswordPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [formData, setFormData] = useState({
-    password: "",
-    confirmPassword: ""
-  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const [token, setToken] = useState("")
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    if (formData.password !== formData.confirmPassword) {
-      alert("Password tidak cocok!")
-      return
+  useEffect(() => {
+    const urlToken = searchParams.get('token')
+    if (urlToken) {
+      setToken(urlToken)
+    } else {
+      setError("Token reset password tidak valid atau sudah kedaluwarsa")
     }
-    
-    if (formData.password.length < 8) {
-      alert("Password harus minimal 8 karakter!")
-      return
-    }
+  }, [searchParams])
 
-    console.log("Password reset with:", formData.password)
-    setIsSuccess(true)
-    
-    setTimeout(() => {
-      window.location.href = "/login"
-    }, 3000)
+  const handleResetPassword = async (newPassword: string, confirmPassword: string) => {
+    try {
+      setIsLoading(true)
+      setError("")
+      setSuccess("")
+      
+      const response = await resetPassword({
+        token,
+        newPassword,
+        confirmPassword
+      })
+      
+      console.log("Password reset successful:", response)
+      setSuccess(response.message)
+      
+      // Redirect to login page after successful reset
+      setTimeout(() => {
+        router.push('/login')
+      }, 3000)
+      
+    } catch (error) {
+      console.error("Reset password error:", error)
+      setError(error instanceof Error ? error.message : "Terjadi kesalahan saat reset password")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -58,121 +71,26 @@ export default function ResetPasswordPage() {
           <div className="flex flex-col w-full max-w-[384px] items-center gap-6">
             <div className="inline-flex items-center gap-4">
               <img className="w-12 h-12 object-cover" alt="Logo" src="/Logo.png" />
-            </div>
-
-            <div className="flex flex-col items-center gap-3 text-center">
+            </div>            <div className="flex flex-col items-center gap-3 text-center">
               <h1 className="font-semibold text-gray-900 text-[28px] leading-[33.6px] [font-family:'Inter-SemiBold',Helvetica]">
-                {isSuccess ? "Password Berhasil Direset!" : "Reset Password"}
+                {success ? "Password Berhasil Direset!" : "Reset Password"}
               </h1>
               <p className="text-sm text-gray-500 max-w-[350px] [font-family:'Inter-Regular',Helvetica]">
-                {isSuccess 
+                {success 
                   ? "Password Anda telah berhasil diubah. Anda akan diarahkan ke halaman login."
                   : "Masukkan password baru untuk akun Anda"
                 }
               </p>
             </div>
-          </div>
-
-          {!isSuccess ? (
-            <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-[384px] gap-6">
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="password"
-                  className="font-medium text-sm text-gray-700 [font-family:'Inter-Medium',Helvetica]"
-                >
-                  Password Baru
-                </label>
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                    <Lock className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={formData.password}
-                    onChange={(e) => handleInputChange("password", e.target.value)}
-                    className="pl-12 pr-12 h-14 text-base [font-family:'Inter-Regular',Helvetica]"
-                    placeholder="Minimal 8 karakter"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                  >
-                    {showPassword ? (
-                      <Eye className="w-5 h-5 text-gray-400" />
-                    ) : (
-                      <EyeOff className="w-5 h-5 text-gray-400" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="confirmPassword"
-                  className="font-medium text-sm text-gray-700 [font-family:'Inter-Medium',Helvetica]"
-                >
-                  Konfirmasi Password Baru
-                </label>
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                    <Lock className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <Input
-                    id="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    value={formData.confirmPassword}
-                    onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                    className="pl-12 pr-12 h-14 text-base [font-family:'Inter-Regular',Helvetica]"
-                    placeholder="Ulangi password baru"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                  >
-                    {showConfirmPassword ? (
-                      <Eye className="w-5 h-5 text-gray-400" />
-                    ) : (
-                      <EyeOff className="w-5 h-5 text-gray-400" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2 p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium text-gray-700 [font-family:'Inter-Medium',Helvetica]">
-                  Password harus memenuhi:
-                </p>
-                <ul className="text-xs text-gray-500 space-y-1 [font-family:'Inter-Regular',Helvetica]">
-                  <li className={formData.password.length >= 8 ? "text-green-600" : ""}>
-                    • Minimal 8 karakter
-                  </li>
-                  <li className={/[A-Z]/.test(formData.password) ? "text-green-600" : ""}>
-                    • Mengandung huruf besar
-                  </li>
-                  <li className={/[a-z]/.test(formData.password) ? "text-green-600" : ""}>
-                    • Mengandung huruf kecil
-                  </li>
-                  <li className={/\d/.test(formData.password) ? "text-green-600" : ""}>
-                    • Mengandung angka
-                  </li>
-                </ul>
-              </div>
-
-              <Button 
-                type="submit"
-                className="w-full h-14 bg-[#3e9edb] hover:bg-[#3589c2] text-white rounded-lg shadow-[0px_4px_12px_#3e9edb40] flex items-center justify-center gap-2"
-              >
-                <Lock className="w-5 h-5" />
-                <span className="font-semibold text-base [font-family:'Inter-SemiBold',Helvetica]">
-                  Reset Password
-                </span>
-              </Button>
-            </form>
+          </div>          {!success ? (
+            <div className="w-full max-w-[384px]">
+              <ResetPasswordForm 
+                onSubmit={handleResetPassword}
+                isLoading={isLoading}
+                error={error}
+                success={success}
+              />
+            </div>
           ) : (
             <div className="flex flex-col w-full max-w-[384px] items-center gap-6">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
