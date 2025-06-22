@@ -30,9 +30,15 @@ export interface User {
   fullName: string;
   phone: string;
   role: 'citizen' | 'admin';
-  isEmailVerified: boolean;
+  emailVerified: boolean;
   createdAt: string;
   updatedAt?: string;
+  // Additional profile fields
+  address?: string;
+  dateOfBirth?: string;
+  occupation?: string;
+  bio?: string;
+  phoneVerified?: boolean;
 }
 
 export interface LoginResponse {
