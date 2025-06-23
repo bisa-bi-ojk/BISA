@@ -11,9 +11,11 @@ import { ChatMessage } from '@/lib/types/dashboard';
 
 interface ChatbotInterfaceProps {
   selectedRegion?: string | null;
+  context?: string;
+  placeholder?: string;
 }
 
-export function ChatbotInterface({ selectedRegion }: ChatbotInterfaceProps) {
+export function ChatbotInterface({ selectedRegion, context = "general", placeholder }: ChatbotInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>(chatbotSampleConversations);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -169,7 +171,7 @@ export function ChatbotInterface({ selectedRegion }: ChatbotInterfaceProps) {
                 <Input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Tanyakan tentang dampak kebijakan..."
+                  placeholder={placeholder || "Tanyakan tentang dampak kebijakan..."}
                   className="flex-1"
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 />

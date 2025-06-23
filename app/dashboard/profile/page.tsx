@@ -35,7 +35,6 @@ export default function ProfilePage() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
-  // Profile form state
   const [profileData, setProfileData] = useState({
     fullName: '',
     email: '',
@@ -46,14 +45,12 @@ export default function ProfilePage() {
     bio: ''
   });
   
-  // Password form state
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
 
-  // UI state
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
   const [profileSuccess, setProfileSuccess] = useState('');
@@ -92,10 +89,6 @@ export default function ProfilePage() {
     setProfileSuccess('');
 
     try {
-      // Here you would typically call an API to update the profile
-      // await updateProfile(profileData);
-      
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setProfileSuccess('Profil berhasil diperbarui!');
@@ -112,7 +105,6 @@ export default function ProfilePage() {
     setPasswordError('');
     setPasswordSuccess('');
 
-    // Validate password
     if (passwordData.newPassword !== passwordData.confirmPassword) {
       setPasswordError('Password baru dan konfirmasi password tidak cocok.');
       setIsUpdatingPassword(false);
@@ -126,10 +118,6 @@ export default function ProfilePage() {
     }
 
     try {
-      // Here you would typically call an API to update the password
-      // await updatePassword(passwordData);
-      
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setPasswordSuccess('Password berhasil diperbarui!');
@@ -157,12 +145,11 @@ export default function ProfilePage() {
   }
 
   if (!isLoggedIn) {
-    return null; // Will redirect to login
+    return null; 
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center py-6">
@@ -183,7 +170,6 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
@@ -201,7 +187,6 @@ export default function ProfilePage() {
             </TabsTrigger>
           </TabsList>
 
-          {/* Profile Information Tab */}
           <TabsContent value="profile" className="space-y-6">
             <Card>
               <CardHeader>
@@ -341,7 +326,6 @@ export default function ProfilePage() {
             </Card>
           </TabsContent>
 
-          {/* Security Tab */}
           <TabsContent value="security" className="space-y-6">
             <Card>
               <CardHeader>
@@ -476,7 +460,6 @@ export default function ProfilePage() {
               </CardContent>
             </Card>
 
-            {/* Security Recommendations */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -520,7 +503,6 @@ export default function ProfilePage() {
             </Card>
           </TabsContent>
 
-          {/* Verification Tab */}
           <TabsContent value="verification" className="space-y-6">
             <Card>
               <CardHeader>
@@ -534,7 +516,6 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {/* Email Verification */}
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div className="flex items-center gap-3">
                       <Mail className="h-5 w-5 text-blue-500" />
@@ -563,7 +544,6 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  {/* Phone Verification */}
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div className="flex items-center gap-3">
                       <Phone className="h-5 w-5 text-green-500" />
@@ -592,7 +572,6 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  {/* Identity Verification */}
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div className="flex items-center gap-3">
                       <User className="h-5 w-5 text-purple-500" />
