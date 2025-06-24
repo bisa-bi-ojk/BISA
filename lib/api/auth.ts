@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 export interface LoginRequest {
   email: string;
@@ -59,26 +59,23 @@ export interface ApiError {
 
 const handleApiError = async (response: Response): Promise<never> => {
   let errorData: ApiError;
-  
+
   try {
     errorData = await response.json();
   } catch {
     errorData = {
       statusCode: response.status,
       message: response.statusText || 'An error occurred',
-      error: 'Unknown Error'
+      error: 'Unknown Error',
     };
   }
-  
+
   throw new Error(errorData.message || 'An error occurred');
 };
 
-const apiRequest = async <T>(
-  endpoint: string,
-  options: RequestInit = {}
-): Promise<T> => {
-  const url = `${API_BASE_URL}${endpoint}`;
-  
+const apiRequest = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
+  const url = `${API_URL}${endpoint}`;
+
   const defaultHeaders = {
     'Content-Type': 'application/json',
   };
@@ -93,16 +90,16 @@ const apiRequest = async <T>(
 
   try {
     const response = await fetch(url, config);
-    
+
     if (!response.ok) {
       await handleApiError(response);
     }
-    
+
     const contentType = response.headers.get('content-type');
     if (contentType && contentType.includes('application/json')) {
       return await response.json();
     }
-    
+
     return response.text() as T;
   } catch (error) {
     if (error instanceof Error) {
@@ -141,17 +138,17 @@ export const login = async (data: LoginRequest): Promise<LoginResponse> => {
     method: 'POST',
     body: JSON.stringify(data),
   });
-  
+
   if (response.access_token) {
     setAuthToken(response.access_token);
   }
-  
+
   return response;
 };
 
 export const logout = async (): Promise<{ message: string }> => {
   const token = getAuthToken();
-  
+
   try {
     const response = await apiRequest<{ message: string }>('/auth/logout', {
       method: 'POST',
@@ -159,9 +156,9 @@ export const logout = async (): Promise<{ message: string }> => {
         Authorization: `Bearer ${token}`,
       },
     });
-    
+
     removeAuthToken();
-    
+
     return response;
   } catch (error) {
     removeAuthToken();
@@ -171,11 +168,11 @@ export const logout = async (): Promise<{ message: string }> => {
 
 export const getProfile = async (): Promise<User> => {
   const token = getAuthToken();
-  
+
   if (!token) {
     throw new Error('No authentication token found');
   }
-  
+
   return apiRequest<User>('/auth/profile', {
     method: 'GET',
     headers: {
@@ -186,12 +183,6 @@ export const getProfile = async (): Promise<User> => {
 
 export const verifyEmail = async (token: string): Promise<{ message: string }> => {
   return apiRequest<{ message: string }>(`/auth/verify-email?token=${encodeURIComponent(token)}`, {
-    method: 'GET',
-  });
-};
-
-export const verifyOtp = async (email: string, otp: string): Promise<{ message: string }> => {
-  return apiRequest<{ message: string }>(`/auth/verify-otp?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`, {
     method: 'GET',
   });
 };
@@ -210,17 +201,15 @@ export const resetPassword = async (data: ResetPasswordRequest): Promise<{ messa
   });
 };
 
-
 export const isAuthenticated = (): boolean => {
   return getAuthToken() !== null;
 };
 
-
 export const getCurrentUser = (): User | null => {
   const token = getAuthToken();
-  
+
   if (!token) return null;
-  
+
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.user || null;
