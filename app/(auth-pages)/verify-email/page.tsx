@@ -7,9 +7,9 @@ import { AlertCircle, ArrowLeft, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -128,5 +128,27 @@ export default function VerifyEmailPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#3e9edb] to-[#24649f] p-4">
+      <Card className="w-full max-w-md border-0 shadow-2xl">
+        <CardContent className="p-8 text-center">
+          <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-b-2 border-[#3e9edb]"></div>
+          <h1 className="mb-2 text-xl font-semibold text-gray-900">Memuat...</h1>
+          <p className="text-gray-600">Mohon tunggu sebentar...</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
