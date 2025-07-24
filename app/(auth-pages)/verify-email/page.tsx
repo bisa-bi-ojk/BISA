@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { verifyEmail } from '@/lib/api/auth';
 import { AlertCircle, ArrowLeft, CheckCircle } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -76,7 +77,7 @@ export default function VerifyEmailPage() {
         <CardContent className="p-8">
           <div className="mb-8 text-center">
             <div className="mb-6 flex justify-center">
-              <img className="h-16 w-16 object-contain" alt="BISA Logo" src="/logo-bg-white.png" />
+              <Image width={64} height={64} className="h-16 w-16 object-contain" alt="BISA Logo" src="/logo-bg-white.png" />
             </div>
 
             <div className="mb-6">

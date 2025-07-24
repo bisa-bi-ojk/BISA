@@ -122,7 +122,7 @@ const mockHouseData: HouseData[] = [
 ];
 
 export default function MapRumahPage() {
-  const { user, isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const router = useRouter();
   const [selectedHouse, setSelectedHouse] = useState<string | null>(null);
   const [showChatbot, setShowChatbot] = useState(false);

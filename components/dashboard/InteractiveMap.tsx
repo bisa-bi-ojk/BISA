@@ -13,7 +13,6 @@ interface InteractiveMapProps {
   onRegionSelect: (regionId: string) => void;
 }
 
-type RegionId = keyof typeof regionalData;
 
 export function InteractiveMap({ selectedRegion, onRegionSelect }: InteractiveMapProps) {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);

@@ -15,7 +15,7 @@ interface ChatbotInterfaceProps {
   placeholder?: string;
 }
 
-export function ChatbotInterface({ selectedRegion, context = "general", placeholder }: ChatbotInterfaceProps) {
+export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>(chatbotSampleConversations);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);

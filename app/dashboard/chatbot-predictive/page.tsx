@@ -17,7 +17,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function ChatbotPredictivePage() {
-  const { user, isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const router = useRouter();
   const [activeChat, setActiveChat] = useState<string | null>(null);
 

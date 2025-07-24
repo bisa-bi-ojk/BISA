@@ -3,8 +3,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bar, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
+interface LineChartData {
+  month: string;
+  digitalized: number;
+  rate: number;
+}
+
+interface PieChartData {
+  wallet: string;
+  recipients: number;
+  percentage: number;
+}
+
 interface DigitalizationChartsProps {
-  data: any[];
+  data: LineChartData[] | PieChartData[];
   title: string;
   type: 'line' | 'pie';
 }

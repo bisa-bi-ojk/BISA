@@ -107,7 +107,7 @@ const mockStatisticsData: StatisticData[] = [
 ];
 
 export default function StatistikPage() {
-  const { user, isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const router = useRouter();
   const [selectedProgram, setSelectedProgram] = useState<string>("all");
   const [selectedPeriod, setSelectedPeriod] = useState<string>("2025");

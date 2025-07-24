@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -48,7 +49,7 @@ export default function ForgotPasswordPage() {
         <CardContent className="flex flex-col items-center gap-10 p-8 md:p-12">
           <div className="flex flex-col w-full max-w-[384px] items-center gap-6">
             <div className="inline-flex items-center gap-4">
-              <img className="w-12 h-12 object-cover" alt="Logo" src="/Logo.png" />
+              <Image width={48} height={48} className="w-12 h-12 object-cover" alt="Logo" src="/Logo.png" />
             </div>
 
             <div className="flex flex-col items-center gap-3 text-center">

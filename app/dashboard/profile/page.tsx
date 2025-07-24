@@ -92,7 +92,7 @@ export default function ProfilePage() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setProfileSuccess('Profil berhasil diperbarui!');
-    } catch (error) {
+    } catch {
       setProfileError('Gagal memperbarui profil. Silakan coba lagi.');
     } finally {
       setIsUpdatingProfile(false);
@@ -126,7 +126,7 @@ export default function ProfilePage() {
         newPassword: '',
         confirmPassword: ''
       });
-    } catch (error) {
+    } catch {
       setPasswordError('Gagal memperbarui password. Silakan coba lagi.');
     } finally {
       setIsUpdatingPassword(false);

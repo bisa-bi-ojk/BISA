@@ -138,7 +138,7 @@ const mockKelurahanData: KelurahanData[] = [
 ];
 
 export default function MapKelurahanPage() {
-  const { user, isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const router = useRouter();
   const [selectedKelurahan, setSelectedKelurahan] = useState<string | null>(null);
   const [showChatbot, setShowChatbot] = useState(false);

@@ -127,7 +127,7 @@ const mockAnomalyData: AnomalyData[] = [
 ];
 
 export default function DeteksiAnomalyPage() {
-  const { user, isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("all");

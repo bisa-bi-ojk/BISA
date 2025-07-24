@@ -3,8 +3,36 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
+interface ChartDataPoint {
+  period?: string;
+  month?: string;
+  recipients?: number;
+  amount?: number;
+  accuracy?: number;
+}
+
+interface StatisticData {
+  program: string;
+  totalRecipients?: number;
+  totalAmount?: number;
+  accuracy?: number;
+  trend?: number;
+  chartData?: ChartDataPoint[];
+}
+
+interface GroupedChartData {
+  period: string;
+  [program: string]: string | number;
+}
+
+interface DirectComparisonData {
+  program: string;
+  value: number;
+  trend?: number;
+}
+
 interface StatisticsChartsProps {
-  data: any[];
+  data: StatisticData[];
   chartType: 'line' | 'bar';
   title: string;
   dataKey: string;
@@ -15,7 +43,7 @@ export function StatisticsCharts({ data, chartType, title, dataKey }: Statistics
   const chartData = data.map(item => {
     if (item.chartData) {
       // For time series data
-      return item.chartData.map((point: any) => ({
+      return item.chartData.map((point: ChartDataPoint) => ({
         period: point.period || point.month,
         [item.program]: point[dataKey] || point.recipients || point.amount || point.accuracy,
         program: item.program
@@ -31,9 +59,9 @@ export function StatisticsCharts({ data, chartType, title, dataKey }: Statistics
   }).flat();
 
   // Group data by period for line charts
-  const groupedData = chartData.reduce((acc: any, curr: any) => {
-    if (curr.period) {
-      const existing = acc.find((item: any) => item.period === curr.period);
+  const groupedData = chartData.reduce((acc: GroupedChartData[], curr: DirectComparisonData | {period: string; [key: string]: string | number; program: string}) => {
+    if ('period' in curr && curr.period) {
+      const existing = acc.find((item) => item.period === curr.period);
       if (existing) {
         Object.assign(existing, { [curr.program]: curr[curr.program] });
       } else {

@@ -6,6 +6,7 @@ import { logout as apiLogout } from '@/lib/api/auth';
 import { navItems } from '@/lib/constants/landing_page/navItems';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, User, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -40,7 +41,9 @@ export function Navbar() {
       <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-4 lg:px-6">
         <div className="flex items-center gap-3">
           <Link href="/">
-          <img 
+          <Image 
+            width={40}
+            height={40}
             src="/Logo.png"
             alt="BISA Logo"
             className="h-10 w-auto dark:filter dark:brightness-0 dark:invert"

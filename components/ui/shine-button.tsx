@@ -2,9 +2,7 @@ import { Button, type ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 
-export interface ShineButtonProps extends ButtonProps {}
-
-export const ShineButton = forwardRef<HTMLButtonElement, ShineButtonProps>(
+export const ShineButton = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <Button

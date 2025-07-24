@@ -23,10 +23,10 @@ interface ChatMessage {
   content: string;
   timestamp: Date;
   analysisType?: string;
-  data?: any;
+  data?: unknown;
 }
 
-export function PredictiveChatbot({ mode, onModeChange }: PredictiveChatbotProps) {
+export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -73,7 +73,7 @@ export function PredictiveChatbot({ mode, onModeChange }: PredictiveChatbotProps
   const generateAIResponse = (query: string, mode: string): ChatMessage => {
     let content = '';
     let analysisType = '';
-    let data = null;
+    const data = null;
 
     switch (mode) {
       case 'demographic-forecast':

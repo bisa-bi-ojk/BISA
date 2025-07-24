@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowLeft, CheckCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -70,7 +71,7 @@ export default function ResetPasswordPage() {
         <CardContent className="flex flex-col items-center gap-10 p-8 md:p-12">
           <div className="flex flex-col w-full max-w-[384px] items-center gap-6">
             <div className="inline-flex items-center gap-4">
-              <img className="w-12 h-12 object-cover" alt="Logo" src="/Logo.png" />
+              <Image width={48} height={48} className="w-12 h-12 object-cover" alt="Logo" src="/Logo.png" />
             </div>            <div className="flex flex-col items-center gap-3 text-center">
               <h1 className="font-semibold text-gray-900 text-[28px] leading-[33.6px] [font-family:'Inter-SemiBold',Helvetica]">
                 {success ? "Password Berhasil Direset!" : "Reset Password"}

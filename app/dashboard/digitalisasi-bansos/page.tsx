@@ -114,7 +114,7 @@ const walletProviders = [
 ];
 
 export default function DigitalisasiBansosPage() {
-  const { user, isLoggedIn, isLoading } = useAuth();
+  const { isLoggedIn, isLoading } = useAuth();
   const router = useRouter();
   const [selectedRegion, setSelectedRegion] = useState("DKI Jakarta");
   const [selectedWallet, setSelectedWallet] = useState("all");
