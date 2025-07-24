@@ -1,20 +1,20 @@
 'use client';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { PredictiveChatbot } from '@/components/dashboard/PredictiveChatbot';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
+import { useAuth } from '@/hooks/use-auth';
+import {
   ArrowLeft,
-  MessageSquare,
-  Bot,
-  TrendingUp,
   BarChart3,
+  Bot,
   Calendar,
-  Target
+  MessageSquare,
+  Target,
+  TrendingUp
 } from 'lucide-react';
-import { PredictiveChatbot } from '@/components/dashboard/PredictiveChatbot';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function ChatbotPredictivePage() {
   const { user, isLoggedIn, isLoading } = useAuth();

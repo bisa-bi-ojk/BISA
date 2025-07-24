@@ -1,14 +1,14 @@
 'use client';
 
-import { ArrowLeft, CheckCircle } from "lucide-react"
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { ArrowLeft, CheckCircle } from "lucide-react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ResetPasswordForm } from "@/components/auth/reset-password-form"
-import { resetPassword } from "@/lib/api/auth"
+import { ResetPasswordForm } from "@/components/auth/reset-password-form";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { resetPassword } from "@/lib/api/auth";
 
 export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false)

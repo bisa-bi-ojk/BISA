@@ -1,10 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { MapPin, Eye, Home } from 'lucide-react';
+import { Home, MapPin } from 'lucide-react';
+import { useState } from 'react';
 
 interface HouseData {
   id: string;

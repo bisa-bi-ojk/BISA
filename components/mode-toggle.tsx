@@ -1,10 +1,10 @@
 "use client"
 
-import { RiMoonLine, RiSunLine } from 'react-icons/ri';
-import { useTheme } from 'next-themes';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils';
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { RiMoonLine, RiSunLine } from 'react-icons/ri';
 
 export function ModeToggle() {
     const { setTheme, resolvedTheme } = useTheme();

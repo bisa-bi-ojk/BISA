@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import { Footer } from "@/components/footer";
-import { techUsed } from "@/lib/constants/about/techUsed";
 import { mission } from "@/lib/constants/about/mission";
+import { techUsed } from "@/lib/constants/about/techUsed";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function About() {
   return (

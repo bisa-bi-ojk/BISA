@@ -1,10 +1,10 @@
 'use client';
 
-import { EyeOff, Lock, Eye, AlertCircle } from "lucide-react"
-import { useState } from "react"
+import { AlertCircle, Eye, EyeOff, Lock } from "lucide-react";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ResetPasswordFormProps } from "@/entity/resetpassword";
 
 export function ResetPasswordForm({ onSubmit, isLoading = false, error, success }: ResetPasswordFormProps) {

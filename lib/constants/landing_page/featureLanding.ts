@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Target, Eye, BarChart3, Users } from "lucide-react";
+import { BarChart3, Eye, Target, Users } from "lucide-react";
 
 export interface Feature {
   icon: LucideIcon;

@@ -1,12 +1,10 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
-import { Poppins, Montserrat } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
-import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/hooks/use-auth";
+import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono, Montserrat, Poppins } from "next/font/google";
+import "./globals.css";
 
 
 const fontSans = Poppins({

@@ -1,11 +1,11 @@
 'use client';
 
-import { Mail, Send, AlertCircle } from "lucide-react"
-import { useState } from "react"
+import { AlertCircle, Mail, Send } from "lucide-react";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ForgotPasswordFormProps } from "@/entity/forgotpasswordprops"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ForgotPasswordFormProps } from "@/entity/forgotpasswordprops";
 
 export function ForgotPasswordForm({ onSubmit, isLoading = false, error, success }: ForgotPasswordFormProps) {
   const [email, setEmail] = useState("")

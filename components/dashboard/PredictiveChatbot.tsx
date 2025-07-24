@@ -1,20 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Bot, 
-  Send, 
-  User, 
-  TrendingUp, 
-  BarChart3, 
-  Calendar, 
-  Target,
-  Lightbulb
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import {
+  Bot,
+  Lightbulb,
+  Send,
+  User
 } from 'lucide-react';
+import { useState } from 'react';
 
 interface PredictiveChatbotProps {
   mode: string;

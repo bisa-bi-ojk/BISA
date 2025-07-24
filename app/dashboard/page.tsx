@@ -1,31 +1,28 @@
 'use client';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { 
-  User, 
-  LogOut, 
-  Map, 
-  BarChart3, 
-  MessageSquare, 
-  Users, 
-  TrendingUp, 
-  MapPin,
-  Settings,
-  Home,
-  FileText,
+import { useAuth } from '@/hooks/use-auth';
+import { dashboardStats } from '@/lib/constants/dashboard/dashboardData';
+import {
+  AlertTriangle,
+  BarChart3,
   Bell,
   Bot,
-  AlertTriangle,
+  ChevronRight,
+  FileText,
+  Home,
+  LogOut,
+  MapPin,
+  Settings,
   Smartphone,
-  Building2,
-  ChevronRight
+  TrendingUp,
+  User,
+  Users
 } from 'lucide-react';
-import { dashboardStats } from '@/lib/constants/dashboard/dashboardData';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function DashboardPage() {
   const { user, isLoggedIn, logout, isLoading } = useAuth();

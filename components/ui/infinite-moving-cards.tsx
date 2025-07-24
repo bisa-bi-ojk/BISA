@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { FaQuoteLeft, FaStar } from "react-icons/fa";
 
 export const InfiniteMovingCards = ({
   items,

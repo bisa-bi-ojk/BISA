@@ -1,13 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { navItems } from '@/lib/constants/landing_page/navItems';
 import { useAuth } from '@/hooks/use-auth';
 import { logout as apiLogout } from '@/lib/api/auth';
-import { Menu, X, User } from 'lucide-react';
+import { navItems } from '@/lib/constants/landing_page/navItems';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Menu, User, X } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

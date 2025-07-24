@@ -1,24 +1,23 @@
 'use client';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { StatisticsCharts } from '@/components/dashboard/StatisticsCharts';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useAuth } from '@/hooks/use-auth';
+import {
   ArrowLeft,
   BarChart3,
-  TrendingUp,
-  TrendingDown,
-  Filter,
   Download,
-  Calendar,
-  Target
+  Filter,
+  Target,
+  TrendingDown,
+  TrendingUp
 } from 'lucide-react';
-import { StatisticsCharts } from '@/components/dashboard/StatisticsCharts';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface StatisticData {
   id: string;

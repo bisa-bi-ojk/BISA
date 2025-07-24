@@ -1,5 +1,5 @@
 // Sample data for the dashboard - this would come from API in production
-import { DashboardStats, RegionalDataMap, ChatMessage, MLModel, Dataset } from '@/lib/types/dashboard';
+import { ChatMessage, DashboardStats, Dataset, MLModel, RegionalDataMap } from '@/lib/types/dashboard';
 
 export const dashboardStats: DashboardStats = {
   totalRecipients: {

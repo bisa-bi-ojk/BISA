@@ -1,12 +1,12 @@
 'use client';
 
-import { EyeOff, Lock, LogIn, Mail, Eye, AlertCircle } from "lucide-react"
-import { useState } from "react"
+import { AlertCircle, Eye, EyeOff, Lock, LogIn, Mail } from "lucide-react";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
-import { LoginFormProps } from "@/entity/loginformprops"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { LoginFormProps } from "@/entity/loginformprops";
 
 export function LoginForm({ onSubmit, isLoading = false, error }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false)

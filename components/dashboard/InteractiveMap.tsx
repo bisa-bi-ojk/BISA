@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { MapPin, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { regionalData } from '@/lib/constants/dashboard/dashboardData';
 import { RegionalData } from '@/lib/types/dashboard';
+import { MapPin, Minus, TrendingDown, TrendingUp } from 'lucide-react';
+import { useState } from 'react';
 
 interface InteractiveMapProps {
   selectedRegion: string | null;

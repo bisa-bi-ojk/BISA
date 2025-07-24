@@ -1,13 +1,13 @@
 "use client"
 
-import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 import { faqData } from "@/lib/constants/landing_page/faqData";
 

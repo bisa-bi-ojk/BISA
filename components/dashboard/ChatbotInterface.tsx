@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { MessageSquare, Send, Bot, User, Lightbulb, TrendingUp } from 'lucide-react';
 import { chatbotSampleConversations } from '@/lib/constants/dashboard/dashboardData';
 import { ChatMessage } from '@/lib/types/dashboard';
+import { Bot, Lightbulb, MessageSquare, Send, TrendingUp, User } from 'lucide-react';
+import { useState } from 'react';
 
 interface ChatbotInterfaceProps {
   selectedRegion?: string | null;

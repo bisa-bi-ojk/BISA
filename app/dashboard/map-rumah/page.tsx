@@ -1,25 +1,20 @@
 'use client';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { ChatbotInterface } from '@/components/dashboard/ChatbotInterface';
+import { InteractiveHouseMap } from '@/components/dashboard/InteractiveHouseMap';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { 
+import { useAuth } from '@/hooks/use-auth';
+import {
   ArrowLeft,
-  Home,
-  Users,
   DollarSign,
+  Home,
   MapPin,
-  Info,
-  User,
-  Calendar,
-  Phone,
-  FileText
+  Users
 } from 'lucide-react';
-import { InteractiveHouseMap } from '@/components/dashboard/InteractiveHouseMap';
-import { ChatbotInterface } from '@/components/dashboard/ChatbotInterface';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface HouseData {
   id: string;

@@ -1,26 +1,26 @@
 'use client';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
-  ArrowLeft,
+import { useAuth } from '@/hooks/use-auth';
+import {
   AlertTriangle,
-  Search,
-  Filter,
-  User,
-  MapPin,
-  DollarSign,
+  ArrowLeft,
   Calendar,
-  Shield,
+  DollarSign,
+  Download,
   Eye,
-  Download
+  Filter,
+  MapPin,
+  Search,
+  Shield,
+  User
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface AnomalyData {
   id: string;

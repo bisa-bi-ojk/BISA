@@ -1,11 +1,11 @@
 'use client';
 
-import { EyeOff, Lock, LogIn, Mail, Eye, User, Phone, AlertCircle } from "lucide-react"
-import { useState } from "react"
+import { AlertCircle, Eye, EyeOff, Lock, LogIn, Mail, Phone, User } from "lucide-react";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { SignupFormProps } from "@/entity/signupform";
 
 export function SignupForm({ onSubmit, isLoading = false, error, success }: SignupFormProps) {

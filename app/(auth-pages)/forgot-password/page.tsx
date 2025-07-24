@@ -1,13 +1,13 @@
 'use client';
 
-import { Mail, ArrowLeft, Send } from "lucide-react"
-import { useState } from "react"
-import Link from "next/link"
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ForgotPasswordForm } from "@/components/auth/forgot-password-form"
-import { forgotPassword } from "@/lib/api/auth"
+import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { forgotPassword } from "@/lib/api/auth";
 
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false)

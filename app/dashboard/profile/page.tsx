@@ -1,31 +1,31 @@
 'use client';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { 
-  User, 
-  ArrowLeft, 
-  Save, 
-  Lock, 
-  Mail, 
-  Phone, 
-  Calendar,
-  MapPin,
-  Shield,
-  CheckCircle,
+import { useAuth } from '@/hooks/use-auth';
+import {
   AlertCircle,
+  ArrowLeft,
+  Calendar,
+  CheckCircle,
   Eye,
-  EyeOff
+  EyeOff,
+  Lock,
+  Mail,
+  MapPin,
+  Phone,
+  Save,
+  Shield,
+  User
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function ProfilePage() {
   const { user, isLoggedIn, isLoading } = useAuth();

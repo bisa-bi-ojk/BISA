@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { LogoutButtonProps } from '@/entity/logoutbutton'
 import { LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { LogoutButtonProps } from '@/entity/logoutbutton'
+import { useState } from 'react'
 
 export default function LogoutButton({ 
   className = '', 

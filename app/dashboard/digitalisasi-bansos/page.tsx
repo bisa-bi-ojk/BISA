@@ -1,26 +1,25 @@
 'use client';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { DigitalizationCharts } from '@/components/dashboard/DigitalizationCharts';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
+import { useAuth } from '@/hooks/use-auth';
+import {
   ArrowLeft,
-  CreditCard,
-  Smartphone,
   Building2,
+  CreditCard,
+  DollarSign,
+  Download,
+  Filter,
+  Smartphone,
   TrendingUp,
   Users,
-  DollarSign,
-  BarChart3,
-  Wallet,
-  Filter,
-  Download
+  Wallet
 } from 'lucide-react';
-import { DigitalizationCharts } from '@/components/dashboard/DigitalizationCharts';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface DigitalizationData {
   region: string;
