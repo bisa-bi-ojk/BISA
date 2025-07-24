@@ -45,10 +45,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' },
-  ],
   icons: {
     icon: ['/favicon-32x32.png', '/favicon-16x16.png'],
     apple: '/apple-touch-icon.png',
