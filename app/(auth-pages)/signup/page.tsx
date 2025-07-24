@@ -64,7 +64,13 @@ export default function SignUpPage() {
         <CardContent className="flex flex-col items-center gap-8 p-8 md:p-12">
           <div className="flex w-full max-w-[384px] flex-col items-center gap-6">
             <div className="inline-flex items-center gap-4">
-              <Image width={48} height={48} className="h-12 w-12 object-cover" alt="Logo" src="/Logo.png" />
+              <Image
+                width={48}
+                height={48}
+                className="h-12 w-12 object-cover"
+                alt="Logo"
+                src="/logo.png"
+              />
             </div>
 
             <div className="flex flex-col items-center gap-3 text-center">

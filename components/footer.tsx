@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import { Github } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { Github } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export function Footer() {
   return (
@@ -14,7 +14,7 @@ export function Footer() {
               <Image
                 width={40}
                 height={40}
-                src="/Logo.png"
+                src="/logo.png"
                 alt="BISA Logo"
                 className="h-10 w-10 rounded-lg bg-white/10 p-1"
               />
@@ -23,7 +23,7 @@ export function Footer() {
                 <p className="text-sm text-blue-200">Bantuan Inklusif & Sasaran Akurat</p>
               </div>
             </div>
-            <p className="text-blue-100 leading-relaxed">
+            <p className="leading-relaxed text-blue-100">
               Platform AI untuk distribusi bantuan sosial yang tepat sasaran.
             </p>
           </div>
@@ -34,24 +34,21 @@ export function Footer() {
               <li>
                 <Link
                   href="/faq"
-                  className="text-blue-200 transition-colors duration-200 hover:text-white hover:underline focus:text-white focus:underline focus:outline-none"
-                >
+                  className="text-blue-200 transition-colors duration-200 hover:text-white hover:underline focus:text-white focus:underline focus:outline-none">
                   FAQ
                 </Link>
               </li>
               <li>
                 <Link
                   href="/guide"
-                  className="text-blue-200 transition-colors duration-200 hover:text-white hover:underline focus:text-white focus:underline focus:outline-none"
-                >
+                  className="text-blue-200 transition-colors duration-200 hover:text-white hover:underline focus:text-white focus:underline focus:outline-none">
                   Panduan
                 </Link>
               </li>
               <li>
                 <Link
                   href="/support"
-                  className="text-blue-200 transition-colors duration-200 hover:text-white hover:underline focus:text-white focus:underline focus:outline-none"
-                >
+                  className="text-blue-200 transition-colors duration-200 hover:text-white hover:underline focus:text-white focus:underline focus:outline-none">
                   Support
                 </Link>
               </li>
@@ -64,16 +61,14 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:info@bisa.go.id"
-                  className="transition-colors duration-200 hover:text-white focus:text-white focus:outline-none"
-                >
+                  className="transition-colors duration-200 hover:text-white focus:text-white focus:outline-none">
                   info@bisa.go.id
                 </a>
               </li>
               <li>
                 <a
                   href="tel:+622112345678"
-                  className="transition-colors duration-200 hover:text-white focus:text-white focus:outline-none"
-                >
+                  className="transition-colors duration-200 hover:text-white focus:text-white focus:outline-none">
                   +62 21 1234 5678
                 </a>
               </li>
@@ -89,8 +84,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-3 text-sm text-blue-100 transition-all duration-200 hover:bg-white/20 hover:text-white focus:bg-white/20 focus:text-white focus:outline-none focus:ring-2 focus:ring-white/50"
-                aria-label="View BISA source code on GitHub"
-              >
+                aria-label="View BISA source code on GitHub">
                 <Github className="h-5 w-5" />
                 <span>GitHub Repository</span>
               </Link>
@@ -99,9 +93,11 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-blue-400/30 pt-8 text-center">
-          <p className="text-blue-200">© 2025 BISA Platform. Dikembangkan untuk Pemerintah Indonesia.</p>
+          <p className="text-blue-200">
+            © 2025 BISA Platform. Dikembangkan untuk Pemerintah Indonesia.
+          </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }
