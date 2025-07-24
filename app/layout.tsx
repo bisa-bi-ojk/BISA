@@ -22,7 +22,9 @@ const fontHeading = Montserrat({
 export const metadata: Metadata = {
   title: "BISA",
   description: "Bantuan Inklusif & Sasaran Akurat",
-  keywords: [],
+  icons: {
+    icon : "Logo.png"
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -38,13 +40,6 @@ export const metadata: Metadata = {
         alt: "Bantuan Inklusif & Sasaran Akurat",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "BISA",
-    description: "Bantuan Inklusif & Sasaran Akurat",
-    creator: "@BISA",
-    images: ["https://bisa.fly.dev/bisa-og.png"],
   },
 };
 
