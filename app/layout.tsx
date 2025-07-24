@@ -49,26 +49,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
+        suppressHydrationWarning
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
           fontHeading.variable
         )}
       >
-        {/* <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        > */}
           <AuthProvider>
             <Navbar />
             {children}
             <Toaster />
           </AuthProvider>
-        {/* </ThemeProvider> */}
       </body>
     </html>
   );
