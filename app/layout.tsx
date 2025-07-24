@@ -19,13 +19,33 @@ const fontHeading = Montserrat({
   variable: "--font-heading",
 });
 
-
 export const metadata: Metadata = {
   title: "BISA",
-  description: "Bantuan",
-  icons: {
-    icon : "Logo.png"
-  }
+  description: "Bantuan Inklusif & Sasaran Akurat",
+  keywords: [],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://bisa.fly.dev",
+    title: "BISA",
+    description: "Bantuan Inklusif & Sasaran Akurat",
+    siteName: "BISA",
+    images: [
+      {
+        url: "https://bisa.fly.dev/bisa-og.png",
+        width: 800,
+        height: 600,
+        alt: "Bantuan Inklusif & Sasaran Akurat",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BISA",
+    description: "Bantuan Inklusif & Sasaran Akurat",
+    creator: "@BISA",
+    images: ["https://bisa.fly.dev/bisa-og.png"],
+  },
 };
 
 export default function RootLayout({
