@@ -44,9 +44,12 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
+# Ensure the entrypoint script is executable
+RUN chmod +x /app/docker-entrypoint.js
+
 # Entrypoint sets up the container.
 ENTRYPOINT [ "/app/docker-entrypoint.js" ]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "pnpm", "run", "start", "--", "-p", "3000", "-H", "0.0.0.0" ]
+CMD [ "pnpm", "run", "start" ]
