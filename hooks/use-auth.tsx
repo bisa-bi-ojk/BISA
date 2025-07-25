@@ -1,13 +1,12 @@
 'use client';
 
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, getProfile, isAuthenticated, removeAuthToken } from '@/lib/api/auth';
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isLoggedIn: boolean;
-  isMounted: boolean;
   login: (user: User) => void;
   logout: () => void;
   refreshUser: () => Promise<void>;
@@ -30,14 +29,8 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
 
   const refreshUser = async () => {
-    // Only check auth on client side after hydration
-    if (typeof window === 'undefined' || !isMounted) {
-      return;
-    }
-
     if (!isAuthenticated()) {
       setUser(null);
       setIsLoading(false);
@@ -49,7 +42,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(userData);
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
-      // If profile fetch fails, likely token is invalid or network error
+      // If profile fetch fails, likely token is invalid
       removeAuthToken();
       setUser(null);
     } finally {
@@ -67,20 +60,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   useEffect(() => {
-    setIsMounted(true);
+    refreshUser();
   }, []);
-
-  useEffect(() => {
-    if (isMounted) {
-      refreshUser();
-    }
-  }, [isMounted]);
 
   const value: AuthContextType = {
     user,
     isLoading,
     isLoggedIn: !!user,
-    isMounted,
     login,
     logout,
     refreshUser,

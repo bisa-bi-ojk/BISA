@@ -1,8 +1,7 @@
 'use client';
 
-import { Github } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
+import { Github } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -11,10 +10,8 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <Image
-                width={40}
-                height={40}
-                src="/logo.png"
+              <img
+                src="/Logo.png"
                 alt="BISA Logo"
                 className="h-10 w-10 rounded-lg bg-white/10 p-1"
               />

@@ -1,7 +1,6 @@
 'use client';
 
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -64,13 +63,7 @@ export default function SignUpPage() {
         <CardContent className="flex flex-col items-center gap-8 p-8 md:p-12">
           <div className="flex w-full max-w-[384px] flex-col items-center gap-6">
             <div className="inline-flex items-center gap-4">
-              <Image
-                width={64}
-                height={64}
-                className="h-16 w-16 object-contain"
-                alt="Logo"
-                src="/logo-white.png"
-              />
+              <img className="h-12 w-12 object-cover" alt="Logo" src="/Logo.png" />
             </div>
 
             <div className="flex flex-col items-center gap-3 text-center">

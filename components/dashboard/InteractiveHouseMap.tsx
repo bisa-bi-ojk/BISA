@@ -1,8 +1,10 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Home, MapPin } from 'lucide-react';
 import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { MapPin, Eye, Home } from 'lucide-react';
 
 interface HouseData {
   id: string;
@@ -26,7 +28,11 @@ interface InteractiveHouseMapProps {
   onHouseSelect: (houseId: string) => void;
 }
 
-export function InteractiveHouseMap({ houseData, selectedHouse, onHouseSelect }: InteractiveHouseMapProps) {
+export function InteractiveHouseMap({
+  houseData,
+  selectedHouse,
+  onHouseSelect,
+}: InteractiveHouseMapProps) {
   const [hoveredHouse, setHoveredHouse] = useState<string | null>(null);
 
   // Simple grid layout for houses (in real app, this would be a proper map)
@@ -39,48 +45,42 @@ export function InteractiveHouseMap({ houseData, selectedHouse, onHouseSelect }:
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="relative h-full bg-gray-100 rounded-lg p-4">
+        <div className="relative h-full rounded-lg bg-gray-100 p-4">
           {/* Simulated map view with house markers */}
-          <div className="grid grid-cols-6 gap-4 h-full">
+          <div className="grid h-full grid-cols-6 gap-4">
             {houseData.map((house, index) => (
               <div
                 key={house.id}
-                className={`
-                  relative flex items-center justify-center cursor-pointer transition-all duration-200
-                  ${selectedHouse === house.id 
-                    ? 'scale-125 z-10' 
-                    : hoveredHouse === house.id 
-                      ? 'scale-110' 
+                className={`relative flex cursor-pointer items-center justify-center transition-all duration-200 ${
+                  selectedHouse === house.id
+                    ? 'z-10 scale-125'
+                    : hoveredHouse === house.id
+                      ? 'scale-110'
                       : 'scale-100'
-                  }
-                `}
+                } `}
                 style={{
                   gridColumn: `${(index % 6) + 1}`,
-                  gridRow: `${Math.floor(index / 6) + 1}`
+                  gridRow: `${Math.floor(index / 6) + 1}`,
                 }}
                 onClick={() => onHouseSelect(house.id)}
                 onMouseEnter={() => setHoveredHouse(house.id)}
-                onMouseLeave={() => setHoveredHouse(null)}
-              >
+                onMouseLeave={() => setHoveredHouse(null)}>
                 <div
-                  className={`
-                    w-12 h-12 rounded-lg border-2 flex items-center justify-center shadow-lg
-                    ${selectedHouse === house.id
-                      ? 'bg-blue-500 border-blue-600 text-white'
+                  className={`flex h-12 w-12 items-center justify-center rounded-lg border-2 shadow-lg ${
+                    selectedHouse === house.id
+                      ? 'border-blue-600 bg-blue-500 text-white'
                       : hoveredHouse === house.id
-                        ? 'bg-blue-100 border-blue-300 text-blue-700'
-                        : 'bg-white border-gray-300 text-gray-600 hover:bg-gray-50'
-                    }
-                  `}
-                >
+                        ? 'border-blue-300 bg-blue-100 text-blue-700'
+                        : 'border-gray-300 bg-white text-gray-600 hover:bg-gray-50'
+                  } `}>
                   <Home className="h-6 w-6" />
                 </div>
-                
+
                 {/* Tooltip */}
                 {hoveredHouse === house.id && (
-                  <div className="absolute bottom-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20">
+                  <div className="absolute bottom-14 left-1/2 z-20 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-2 py-1 text-xs text-white">
                     {house.familyHead}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-black"></div>
+                    <div className="absolute left-1/2 top-full -translate-x-1/2 transform border-4 border-transparent border-t-black"></div>
                   </div>
                 )}
               </div>
@@ -88,22 +88,22 @@ export function InteractiveHouseMap({ houseData, selectedHouse, onHouseSelect }:
           </div>
 
           {/* Map Legend */}
-          <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-lg">
-            <h4 className="text-sm font-medium mb-2">Legend</h4>
+          <div className="absolute bottom-4 left-4 rounded-lg bg-white p-3 shadow-lg">
+            <h4 className="mb-2 text-sm font-medium">Legend</h4>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                <div className="h-3 w-3 rounded bg-blue-500"></div>
                 <span className="text-xs">Rumah Terpilih</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-white border border-gray-300 rounded"></div>
+                <div className="h-3 w-3 rounded border border-gray-300 bg-white"></div>
                 <span className="text-xs">Rumah Tangga</span>
               </div>
             </div>
           </div>
 
           {/* Instructions */}
-          <div className="absolute top-4 right-4 bg-white p-3 rounded-lg shadow-lg max-w-xs">
+          <div className="absolute right-4 top-4 max-w-xs rounded-lg bg-white p-3 shadow-lg">
             <p className="text-xs text-gray-600">
               Klik pada rumah untuk melihat detail keluarga dan anggotanya
             </p>

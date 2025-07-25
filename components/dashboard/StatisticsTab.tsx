@@ -1,12 +1,34 @@
 'use client';
 
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { BarChart3, Calendar, Download, Filter, TrendingDown, TrendingUp } from 'lucide-react';
-import { useState } from 'react';
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  AreaChart,
+  Area,
+} from 'recharts';
+import { TrendingUp, TrendingDown, BarChart3, Filter, Download, Calendar } from 'lucide-react';
 
 interface StatisticsTabProps {
   selectedRegion?: string | null;
@@ -29,7 +51,7 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
     { month: 'Sep', bansos: 20.1, pkh: 12.8, bst: 9.2, kkp: 7.4 },
     { month: 'Oct', bansos: 21.3, pkh: 13.4, bst: 9.6, kkp: 7.8 },
     { month: 'Nov', bansos: 22.1, pkh: 14.1, bst: 10.2, kkp: 8.2 },
-    { month: 'Dec', bansos: 23.5, pkh: 14.8, bst: 10.6, kkp: 8.7 }
+    { month: 'Dec', bansos: 23.5, pkh: 14.8, bst: 10.6, kkp: 8.7 },
   ];
 
   const regionData = [
@@ -38,39 +60,51 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
     { region: 'Jawa Tengah', recipients: 176, priority: 'Sedang', color: '#f59e0b' },
     { region: 'Sumatera Utara', recipients: 142, priority: 'Tinggi', color: '#ef4444' },
     { region: 'DKI Jakarta', recipients: 89, priority: 'Rendah', color: '#10b981' },
-    { region: 'Banten', recipients: 67, priority: 'Rendah', color: '#10b981' }
+    { region: 'Banten', recipients: 67, priority: 'Rendah', color: '#10b981' },
   ];
 
   const effectivenessData = [
     { period: 'Q1 2024', accuracy: 91.2, coverage: 87.5, satisfaction: 89.3 },
     { period: 'Q2 2024', accuracy: 92.8, coverage: 89.1, satisfaction: 90.7 },
     { period: 'Q3 2024', accuracy: 93.5, coverage: 90.4, satisfaction: 91.2 },
-    { period: 'Q4 2024', accuracy: 94.2, coverage: 91.8, satisfaction: 92.1 }
+    { period: 'Q4 2024', accuracy: 94.2, coverage: 91.8, satisfaction: 92.1 },
   ];
 
   const budgetAllocation = [
     { name: 'Bantuan Sosial', value: 42.5, color: '#3b82f6' },
     { name: 'PKH', value: 28.3, color: '#10b981' },
     { name: 'BST', value: 18.7, color: '#f59e0b' },
-    { name: 'KKP & Lainnya', value: 10.5, color: '#8b5cf6' }
+    { name: 'KKP & Lainnya', value: 10.5, color: '#8b5cf6' },
   ];
 
   const impactMetrics = [
-    { indicator: 'Tingkat Kemiskinan', baseline: 12.8, current: 11.2, target: 10.5, improvement: -1.6 },
-    { indicator: 'Gini Ratio', baseline: 0.382, current: 0.371, target: 0.360, improvement: -0.011 },
+    {
+      indicator: 'Tingkat Kemiskinan',
+      baseline: 12.8,
+      current: 11.2,
+      target: 10.5,
+      improvement: -1.6,
+    },
+    { indicator: 'Gini Ratio', baseline: 0.382, current: 0.371, target: 0.36, improvement: -0.011 },
     { indicator: 'IPM', baseline: 72.3, current: 73.8, target: 75.0, improvement: 1.5 },
-    { indicator: 'Prevalensi Stunting', baseline: 24.4, current: 21.6, target: 19.0, improvement: -2.8 }
+    {
+      indicator: 'Prevalensi Stunting',
+      baseline: 24.4,
+      current: 21.6,
+      target: 19.0,
+      improvement: -2.8,
+    },
   ];
 
   return (
     <div className="space-y-6">
       {/* Filter Controls */}
-      <div className="flex flex-wrap gap-4 p-4 bg-gray-50 rounded-lg">
+      <div className="flex flex-wrap gap-4 rounded-lg bg-gray-50 p-4">
         <div className="flex items-center gap-2">
           <Filter className="h-4 w-4 text-gray-500" />
           <span className="text-sm font-medium">Filter:</span>
         </div>
-        
+
         <Select value={timeFilter} onValueChange={setTimeFilter}>
           <SelectTrigger className="w-40">
             <SelectValue placeholder="Periode waktu" />
@@ -105,30 +139,30 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
 
         <div className="ml-auto flex gap-2">
           <Button variant="outline" size="sm">
-            <Download className="h-4 w-4 mr-1" />
+            <Download className="mr-1 h-4 w-4" />
             Export Data
           </Button>
           <Button variant="outline" size="sm">
-            <Calendar className="h-4 w-4 mr-1" />
+            <Calendar className="mr-1 h-4 w-4" />
             Laporan Bulanan
           </Button>
         </div>
       </div>
 
       {/* Key Performance Indicators */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Total Anggaran</p>
                 <p className="text-2xl font-bold">Rp 45.2M</p>
-                <div className="flex items-center gap-1 mt-1">
+                <div className="mt-1 flex items-center gap-1">
                   <TrendingUp className="h-3 w-3 text-green-500" />
                   <span className="text-xs text-green-600">+8.2% dari target</span>
                 </div>
               </div>
-              <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
                 <span className="text-xl">💰</span>
               </div>
             </div>
@@ -141,12 +175,12 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
               <div>
                 <p className="text-sm text-gray-600">Penerima Aktif</p>
                 <p className="text-2xl font-bold">2,459</p>
-                <div className="flex items-center gap-1 mt-1">
+                <div className="mt-1 flex items-center gap-1">
                   <TrendingUp className="h-3 w-3 text-green-500" />
                   <span className="text-xs text-green-600">+12% bulan ini</span>
                 </div>
               </div>
-              <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100">
                 <span className="text-xl">👥</span>
               </div>
             </div>
@@ -159,12 +193,12 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
               <div>
                 <p className="text-sm text-gray-600">Tingkat Akurasi</p>
                 <p className="text-2xl font-bold">94.5%</p>
-                <div className="flex items-center gap-1 mt-1">
+                <div className="mt-1 flex items-center gap-1">
                   <TrendingUp className="h-3 w-3 text-green-500" />
                   <span className="text-xs text-green-600">+2.1% dari bulan lalu</span>
                 </div>
               </div>
-              <div className="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100">
                 <span className="text-xl">🎯</span>
               </div>
             </div>
@@ -177,12 +211,12 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
               <div>
                 <p className="text-sm text-gray-600">Efisiensi Program</p>
                 <p className="text-2xl font-bold">87.3%</p>
-                <div className="flex items-center gap-1 mt-1">
+                <div className="mt-1 flex items-center gap-1">
                   <TrendingDown className="h-3 w-3 text-red-500" />
                   <span className="text-xs text-red-600">-1.2% dari target</span>
                 </div>
               </div>
-              <div className="h-12 w-12 bg-orange-100 rounded-lg flex items-center justify-center">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange-100">
                 <span className="text-xl">⚡</span>
               </div>
             </div>
@@ -191,7 +225,7 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Distribution Trend */}
         <Card>
           <CardHeader>
@@ -206,12 +240,42 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
                 <YAxis />
-                <Tooltip formatter={(value, name) => [`Rp ${value}M`, String(name).toUpperCase()]} />
+                <Tooltip
+                  formatter={(value, name) => [`Rp ${value}M`, String(name).toUpperCase()]}
+                />
                 <Legend />
-                <Area type="monotone" dataKey="bansos" stackId="1" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.7} />
-                <Area type="monotone" dataKey="pkh" stackId="1" stroke="#10b981" fill="#10b981" fillOpacity={0.7} />
-                <Area type="monotone" dataKey="bst" stackId="1" stroke="#f59e0b" fill="#f59e0b" fillOpacity={0.7} />
-                <Area type="monotone" dataKey="kkp" stackId="1" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.7} />
+                <Area
+                  type="monotone"
+                  dataKey="bansos"
+                  stackId="1"
+                  stroke="#3b82f6"
+                  fill="#3b82f6"
+                  fillOpacity={0.7}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="pkh"
+                  stackId="1"
+                  stroke="#10b981"
+                  fill="#10b981"
+                  fillOpacity={0.7}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="bst"
+                  stackId="1"
+                  stroke="#f59e0b"
+                  fill="#f59e0b"
+                  fillOpacity={0.7}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="kkp"
+                  stackId="1"
+                  stroke="#8b5cf6"
+                  fill="#8b5cf6"
+                  fillOpacity={0.7}
+                />
               </AreaChart>
             </ResponsiveContainer>
           </CardContent>
@@ -248,9 +312,27 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
                 <YAxis domain={[80, 100]} />
                 <Tooltip formatter={(value) => [`${value}%`, '']} />
                 <Legend />
-                <Line type="monotone" dataKey="accuracy" stroke="#3b82f6" strokeWidth={3} name="Akurasi" />
-                <Line type="monotone" dataKey="coverage" stroke="#10b981" strokeWidth={3} name="Cakupan" />
-                <Line type="monotone" dataKey="satisfaction" stroke="#f59e0b" strokeWidth={3} name="Kepuasan" />
+                <Line
+                  type="monotone"
+                  dataKey="accuracy"
+                  stroke="#3b82f6"
+                  strokeWidth={3}
+                  name="Akurasi"
+                />
+                <Line
+                  type="monotone"
+                  dataKey="coverage"
+                  stroke="#10b981"
+                  strokeWidth={3}
+                  name="Cakupan"
+                />
+                <Line
+                  type="monotone"
+                  dataKey="satisfaction"
+                  stroke="#f59e0b"
+                  strokeWidth={3}
+                  name="Kepuasan"
+                />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
@@ -272,8 +354,7 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
                   label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
                   outerRadius={100}
                   fill="#8884d8"
-                  dataKey="value"
-                >
+                  dataKey="value">
                   {budgetAllocation.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
@@ -294,24 +375,36 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
           </p>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {impactMetrics.map((metric, index) => (
-              <div key={index} className="p-4 border rounded-lg">
-                <h4 className="font-medium text-sm mb-3">{metric.indicator}</h4>
+              <div key={index} className="rounded-lg border p-4">
+                <h4 className="mb-3 text-sm font-medium">{metric.indicator}</h4>
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-500">Baseline:</span>
-                    <span>{typeof metric.baseline === 'number' && metric.baseline < 1 ? metric.baseline.toFixed(3) : metric.baseline}</span>
+                    <span>
+                      {typeof metric.baseline === 'number' && metric.baseline < 1
+                        ? metric.baseline.toFixed(3)
+                        : metric.baseline}
+                    </span>
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-500">Saat ini:</span>
-                    <span>{typeof metric.current === 'number' && metric.current < 1 ? metric.current.toFixed(3) : metric.current}</span>
+                    <span>
+                      {typeof metric.current === 'number' && metric.current < 1
+                        ? metric.current.toFixed(3)
+                        : metric.current}
+                    </span>
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-500">Target:</span>
-                    <span>{typeof metric.target === 'number' && metric.target < 1 ? metric.target.toFixed(3) : metric.target}</span>
+                    <span>
+                      {typeof metric.target === 'number' && metric.target < 1
+                        ? metric.target.toFixed(3)
+                        : metric.target}
+                    </span>
                   </div>
-                  <div className="flex justify-between items-center pt-2 border-t">
+                  <div className="flex items-center justify-between border-t pt-2">
                     <span className="text-xs font-medium">Perubahan:</span>
                     <div className="flex items-center gap-1">
                       {metric.improvement > 0 ? (
@@ -319,8 +412,12 @@ export function StatisticsTab({ selectedRegion }: StatisticsTabProps) {
                       ) : (
                         <TrendingDown className="h-3 w-3 text-red-500" />
                       )}
-                      <span className={`text-xs font-medium ${metric.improvement > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        {metric.improvement > 0 ? '+' : ''}{typeof metric.improvement === 'number' && Math.abs(metric.improvement) < 1 ? metric.improvement.toFixed(3) : metric.improvement}
+                      <span
+                        className={`text-xs font-medium ${metric.improvement > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                        {metric.improvement > 0 ? '+' : ''}
+                        {typeof metric.improvement === 'number' && Math.abs(metric.improvement) < 1
+                          ? metric.improvement.toFixed(3)
+                          : metric.improvement}
                       </span>
                     </div>
                   </div>

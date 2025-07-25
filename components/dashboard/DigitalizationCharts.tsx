@@ -1,22 +1,24 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Bar, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
-interface LineChartData {
-  month: string;
-  digitalized: number;
-  rate: number;
-}
-
-interface PieChartData {
-  wallet: string;
-  recipients: number;
-  percentage: number;
-}
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 
 interface DigitalizationChartsProps {
-  data: LineChartData[] | PieChartData[];
+  data: any[];
   title: string;
   type: 'line' | 'pie';
 }
@@ -47,24 +49,19 @@ export function DigitalizationCharts({ data, title, type }: DigitalizationCharts
               <XAxis dataKey="month" />
               <YAxis yAxisId="left" />
               <YAxis yAxisId="right" orientation="right" />
-              <Tooltip 
+              <Tooltip
                 formatter={(value: number, name: string) => [
                   formatValue(value, name === 'rate' ? 'percentage' : ''),
-                  name === 'digitalized' ? 'Terdigitalisasi' : 'Tingkat (%)'
+                  name === 'digitalized' ? 'Terdigitalisasi' : 'Tingkat (%)',
                 ]}
               />
               <Legend />
-              <Bar 
-                yAxisId="left"
-                dataKey="digitalized" 
-                fill="#3B82F6"
-                name="Terdigitalisasi"
-              />
-              <Line 
+              <Bar yAxisId="left" dataKey="digitalized" fill="#3B82F6" name="Terdigitalisasi" />
+              <Line
                 yAxisId="right"
-                type="monotone" 
-                dataKey="rate" 
-                stroke="#10B981" 
+                type="monotone"
+                dataKey="rate"
+                stroke="#10B981"
                 strokeWidth={3}
                 name="Tingkat (%)"
               />
@@ -79,8 +76,7 @@ export function DigitalizationCharts({ data, title, type }: DigitalizationCharts
                 label={({ wallet, percentage }) => `${wallet} (${percentage}%)`}
                 outerRadius={80}
                 fill="#8884d8"
-                dataKey="recipients"
-              >
+                dataKey="recipients">
                 {data.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}

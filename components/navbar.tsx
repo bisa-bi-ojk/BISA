@@ -1,18 +1,17 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { navItems } from '@/lib/constants/landing_page/navItems';
 import { useAuth } from '@/hooks/use-auth';
 import { logout as apiLogout } from '@/lib/api/auth';
-import { navItems } from '@/lib/constants/landing_page/navItems';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, User, X } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import { Menu, X, User } from 'lucide-react';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, isLoggedIn, logout, isMounted, isLoading } = useAuth();
+  const { user, isLoggedIn, logout } = useAuth();
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
@@ -41,10 +40,8 @@ export function Navbar() {
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-6">
         <div className="flex items-center gap-3">
           <Link href="/">
-            <Image
-              width={40}
-              height={40}
-              src="/logo.png"
+            <img
+              src="/Logo.png"
               alt="BISA Logo"
               className="h-10 w-auto dark:brightness-0 dark:invert dark:filter"
             />
@@ -70,9 +67,7 @@ export function Navbar() {
 
           {/* Desktop Auth Section */}
           <div className="hidden items-center gap-4 sm:flex">
-            {!isMounted || isLoading ? (
-              <div className="h-10 w-20 animate-pulse rounded-lg bg-muted"></div>
-            ) : isLoggedIn ? (
+            {isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
                   <User className="h-4 w-4 text-muted-foreground" />
@@ -131,9 +126,7 @@ export function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
                 className="border-t border-border pt-3">
-                {!isMounted || isLoading ? (
-                  <div className="h-12 w-full animate-pulse rounded-lg bg-muted"></div>
-                ) : isLoggedIn ? (
+                {isLoggedIn ? (
                   <div className="space-y-3">
                     <div className="flex items-center gap-2 rounded-lg bg-muted px-4 py-2">
                       <User className="h-4 w-4 text-muted-foreground" />

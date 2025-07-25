@@ -4,12 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { verifyEmail } from '@/lib/api/auth';
 import { AlertCircle, ArrowLeft, CheckCircle } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function VerifyEmailContent() {
+export default function VerifyEmailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -77,13 +76,7 @@ function VerifyEmailContent() {
         <CardContent className="p-8">
           <div className="mb-8 text-center">
             <div className="mb-6 flex justify-center">
-              <Image
-                width={64}
-                height={64}
-                className="h-16 w-16 object-contain"
-                alt="Logo"
-                src="/logo-white.png"
-              />
+              <img className="h-16 w-16 object-contain" alt="BISA Logo" src="/logo-bg-white.png" />
             </div>
 
             <div className="mb-6">
@@ -134,27 +127,5 @@ function VerifyEmailContent() {
         </CardContent>
       </Card>
     </div>
-  );
-}
-
-function LoadingFallback() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#3e9edb] to-[#24649f] p-4">
-      <Card className="w-full max-w-md border-0 shadow-2xl">
-        <CardContent className="p-8 text-center">
-          <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-b-2 border-[#3e9edb]"></div>
-          <h1 className="mb-2 text-xl font-semibold text-gray-900">Memuat...</h1>
-          <p className="text-gray-600">Mohon tunggu sebentar...</p>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-export default function VerifyEmailPage() {
-  return (
-    <Suspense fallback={<LoadingFallback />}>
-      <VerifyEmailContent />
-    </Suspense>
   );
 }

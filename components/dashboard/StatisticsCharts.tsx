@@ -1,38 +1,21 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
-interface ChartDataPoint {
-  period?: string;
-  month?: string;
-  recipients?: number;
-  amount?: number;
-  accuracy?: number;
-}
-
-interface StatisticData {
-  program: string;
-  totalRecipients?: number;
-  totalAmount?: number;
-  accuracy?: number;
-  trend?: number;
-  chartData?: ChartDataPoint[];
-}
-
-interface GroupedChartData {
-  period: string;
-  [program: string]: string | number;
-}
-
-interface DirectComparisonData {
-  program: string;
-  value: number;
-  trend?: number;
-}
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from 'recharts';
 
 interface StatisticsChartsProps {
-  data: StatisticData[];
+  data: any[];
   chartType: 'line' | 'bar';
   title: string;
   dataKey: string;
@@ -40,28 +23,30 @@ interface StatisticsChartsProps {
 
 export function StatisticsCharts({ data, chartType, title, dataKey }: StatisticsChartsProps) {
   // Transform data for charts
-  const chartData = data.map(item => {
-    if (item.chartData) {
-      // For time series data
-      return item.chartData.map((point: ChartDataPoint) => ({
-        period: point.period || point.month,
-        [item.program]: point[dataKey] || point.recipients || point.amount || point.accuracy,
-        program: item.program
-      }));
-    } else {
-      // For direct comparison data
-      return {
-        program: item.program,
-        value: item[dataKey] || item.totalRecipients || item.totalAmount || item.accuracy,
-        trend: item.trend
-      };
-    }
-  }).flat();
+  const chartData = data
+    .map((item) => {
+      if (item.chartData) {
+        // For time series data
+        return item.chartData.map((point: any) => ({
+          period: point.period || point.month,
+          [item.program]: point[dataKey] || point.recipients || point.amount || point.accuracy,
+          program: item.program,
+        }));
+      } else {
+        // For direct comparison data
+        return {
+          program: item.program,
+          value: item[dataKey] || item.totalRecipients || item.totalAmount || item.accuracy,
+          trend: item.trend,
+        };
+      }
+    })
+    .flat();
 
   // Group data by period for line charts
-  const groupedData = chartData.reduce((acc: GroupedChartData[], curr: DirectComparisonData | {period: string; [key: string]: string | number; program: string}) => {
-    if ('period' in curr && curr.period) {
-      const existing = acc.find((item) => item.period === curr.period);
+  const groupedData = chartData.reduce((acc: any, curr: any) => {
+    if (curr.period) {
+      const existing = acc.find((item: any) => item.period === curr.period);
       if (existing) {
         Object.assign(existing, { [curr.program]: curr[curr.program] });
       } else {
@@ -71,7 +56,7 @@ export function StatisticsCharts({ data, chartType, title, dataKey }: Statistics
     return acc;
   }, []);
 
-  const finalData = chartType === 'line' ? groupedData : chartData.filter(item => item.program);
+  const finalData = chartType === 'line' ? groupedData : chartData.filter((item) => item.program);
 
   const formatValue = (value: number) => {
     if (dataKey === 'amount') {
@@ -113,11 +98,7 @@ export function StatisticsCharts({ data, chartType, title, dataKey }: Statistics
               <XAxis dataKey="program" />
               <YAxis tickFormatter={formatValue} />
               <Tooltip formatter={(value: number) => formatValue(value)} />
-              <Bar 
-                dataKey="value" 
-                fill="#3B82F6"
-                radius={[4, 4, 0, 0]}
-              />
+              <Bar dataKey="value" fill="#3B82F6" radius={[4, 4, 0, 0]} />
             </BarChart>
           )}
         </ResponsiveContainer>

@@ -1,20 +1,25 @@
 'use client';
 
-import { ChatbotInterface } from '@/components/dashboard/ChatbotInterface';
-import { InteractiveHouseMap } from '@/components/dashboard/InteractiveHouseMap';
-import { Badge } from '@/components/ui/badge';
+import { useAuth } from '@/hooks/use-auth';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useAuth } from '@/hooks/use-auth';
+import { Badge } from '@/components/ui/badge';
 import {
   ArrowLeft,
-  DollarSign,
   Home,
+  Users,
+  DollarSign,
   MapPin,
-  Users
+  Info,
+  User,
+  Calendar,
+  Phone,
+  FileText,
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { InteractiveHouseMap } from '@/components/dashboard/InteractiveHouseMap';
+import { ChatbotInterface } from '@/components/dashboard/ChatbotInterface';
 
 interface HouseData {
   id: string;
@@ -51,78 +56,82 @@ interface HouseData {
 
 const mockHouseData: HouseData[] = [
   {
-    id: "house-001",
-    address: "Jl. Mawar No. 12, RT 03/RW 05",
-    familyHead: "Budi Santoso",
+    id: 'house-001',
+    address: 'Jl. Mawar No. 12, RT 03/RW 05',
+    familyHead: 'Budi Santoso',
     familySize: 4,
     income: 2500000,
     bansosEligibility: {
-      "PKH": { eligible: true, score: 85, reason: "Memiliki anak usia sekolah dan pendapatan rendah" },
-      "BPNT": { eligible: true, score: 90, reason: "Kategori keluarga miskin dengan anak balita" },
-      "BST": { eligible: false, score: 45, reason: "Pendapatan melebihi batas maksimal" },
-      "PIP": { eligible: true, score: 88, reason: "Memiliki anak usia sekolah dengan prestasi baik" }
+      PKH: {
+        eligible: true,
+        score: 85,
+        reason: 'Memiliki anak usia sekolah dan pendapatan rendah',
+      },
+      BPNT: { eligible: true, score: 90, reason: 'Kategori keluarga miskin dengan anak balita' },
+      BST: { eligible: false, score: 45, reason: 'Pendapatan melebihi batas maksimal' },
+      PIP: { eligible: true, score: 88, reason: 'Memiliki anak usia sekolah dengan prestasi baik' },
     },
     individuals: [
       {
-        id: "ind-001",
-        name: "Budi Santoso",
+        id: 'ind-001',
+        name: 'Budi Santoso',
         age: 42,
-        gender: "Laki-laki",
-        occupation: "Pedagang",
+        gender: 'Laki-laki',
+        occupation: 'Pedagang',
         income: 1800000,
-        education: "SMA",
-        healthStatus: "Sehat",
+        education: 'SMA',
+        healthStatus: 'Sehat',
         bansosStatus: {
-          "PKH": { eligible: true, amount: 750000, lastReceived: "2025-05-15" },
-          "BPNT": { eligible: true, amount: 200000, lastReceived: "2025-06-01" }
-        }
+          PKH: { eligible: true, amount: 750000, lastReceived: '2025-05-15' },
+          BPNT: { eligible: true, amount: 200000, lastReceived: '2025-06-01' },
+        },
       },
       {
-        id: "ind-002",
-        name: "Siti Aminah",
+        id: 'ind-002',
+        name: 'Siti Aminah',
         age: 38,
-        gender: "Perempuan",
-        occupation: "Ibu Rumah Tangga",
+        gender: 'Perempuan',
+        occupation: 'Ibu Rumah Tangga',
         income: 0,
-        education: "SMP",
-        healthStatus: "Sehat",
+        education: 'SMP',
+        healthStatus: 'Sehat',
         bansosStatus: {
-          "PKH": { eligible: true, amount: 750000, lastReceived: "2025-05-15" }
-        }
+          PKH: { eligible: true, amount: 750000, lastReceived: '2025-05-15' },
+        },
       },
       {
-        id: "ind-003",
-        name: "Ahmad Santoso",
+        id: 'ind-003',
+        name: 'Ahmad Santoso',
         age: 15,
-        gender: "Laki-laki",
-        occupation: "Pelajar",
+        gender: 'Laki-laki',
+        occupation: 'Pelajar',
         income: 0,
-        education: "SMP",
-        healthStatus: "Sehat",
+        education: 'SMP',
+        healthStatus: 'Sehat',
         bansosStatus: {
-          "PIP": { eligible: true, amount: 450000, lastReceived: "2025-04-20" }
-        }
+          PIP: { eligible: true, amount: 450000, lastReceived: '2025-04-20' },
+        },
       },
       {
-        id: "ind-004",
-        name: "Dewi Santoso",
+        id: 'ind-004',
+        name: 'Dewi Santoso',
         age: 8,
-        gender: "Perempuan",
-        occupation: "Pelajar",
+        gender: 'Perempuan',
+        occupation: 'Pelajar',
         income: 0,
-        education: "SD",
-        healthStatus: "Sehat",
+        education: 'SD',
+        healthStatus: 'Sehat',
         bansosStatus: {
-          "PIP": { eligible: true, amount: 225000, lastReceived: "2025-04-20" }
-        }
-      }
+          PIP: { eligible: true, amount: 225000, lastReceived: '2025-04-20' },
+        },
+      },
     ],
-    coordinates: [-6.2088, 106.8456]
-  }
+    coordinates: [-6.2088, 106.8456],
+  },
 ];
 
 export default function MapRumahPage() {
-  const { isLoggedIn, isLoading } = useAuth();
+  const { user, isLoggedIn, isLoading } = useAuth();
   const router = useRouter();
   const [selectedHouse, setSelectedHouse] = useState<string | null>(null);
   const [showChatbot, setShowChatbot] = useState(false);
@@ -135,9 +144,9 @@ export default function MapRumahPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#3E9EDB] mx-auto"></div>
+          <div className="mx-auto h-32 w-32 animate-spin rounded-full border-b-2 border-[#3E9EDB]"></div>
           <p className="mt-4 text-gray-600">Memuat...</p>
         </div>
       </div>
@@ -148,43 +157,42 @@ export default function MapRumahPage() {
     return null;
   }
 
-  const selectedHouseData = selectedHouse ? mockHouseData.find(h => h.id === selectedHouse) : null;
+  const selectedHouseData = selectedHouse
+    ? mockHouseData.find((h) => h.id === selectedHouse)
+    : null;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+      <div className="border-b bg-white shadow-sm">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between py-6">
             <div className="flex items-center space-x-4">
-              <Button 
-                onClick={() => router.push('/dashboard')}
-                variant="outline" 
-                size="sm"
-              >
-                <ArrowLeft className="h-4 w-4 mr-2" />
+              <Button onClick={() => router.push('/dashboard')} variant="outline" size="sm">
+                <ArrowLeft className="mr-2 h-4 w-4" />
                 Kembali
               </Button>
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">Peta Interaktif Per Rumah</h1>
-                <p className="text-gray-600">Visualisasi data keluarga dan individu per rumah tangga</p>
+                <p className="text-gray-600">
+                  Visualisasi data keluarga dan individu per rumah tangga
+                </p>
               </div>
             </div>
-            <Button 
+            <Button
               onClick={() => setShowChatbot(!showChatbot)}
-              variant={showChatbot ? "default" : "outline"}
-              size="sm"
-            >
-              <MapPin className="h-4 w-4 mr-2" />
+              variant={showChatbot ? 'default' : 'outline'}
+              size="sm">
+              <MapPin className="mr-2 h-4 w-4" />
               {showChatbot ? 'Tutup Chat' : 'Buka Chat'}
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <InteractiveHouseMap 
+            <InteractiveHouseMap
               houseData={mockHouseData}
               selectedHouse={selectedHouse}
               onHouseSelect={setSelectedHouse}
@@ -217,7 +225,9 @@ export default function MapRumahPage() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-600">Pendapatan</p>
-                        <p className="font-medium">Rp {selectedHouseData.income.toLocaleString()}</p>
+                        <p className="font-medium">
+                          Rp {selectedHouseData.income.toLocaleString()}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -232,10 +242,10 @@ export default function MapRumahPage() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     {Object.entries(selectedHouseData.bansosEligibility).map(([program, data]) => (
-                      <div key={program} className="p-3 border rounded-lg">
-                        <div className="flex justify-between items-start mb-2">
+                      <div key={program} className="rounded-lg border p-3">
+                        <div className="mb-2 flex items-start justify-between">
                           <h4 className="font-medium">{program}</h4>
-                          <Badge variant={data.eligible ? "default" : "secondary"}>
+                          <Badge variant={data.eligible ? 'default' : 'secondary'}>
                             {data.eligible ? 'Layak' : 'Tidak Layak'}
                           </Badge>
                         </div>
@@ -256,8 +266,8 @@ export default function MapRumahPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {selectedHouseData.individuals.map((individual) => (
-                      <div key={individual.id} className="p-4 border rounded-lg space-y-3">
-                        <div className="flex justify-between items-start">
+                      <div key={individual.id} className="space-y-3 rounded-lg border p-4">
+                        <div className="flex items-start justify-between">
                           <div>
                             <h4 className="font-medium">{individual.name}</h4>
                             <p className="text-sm text-gray-600">
@@ -265,7 +275,7 @@ export default function MapRumahPage() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <div className="grid grid-cols-2 gap-2 text-sm">
                           <div>
                             <span className="text-gray-600">Pendidikan:</span>
@@ -279,18 +289,25 @@ export default function MapRumahPage() {
 
                         {Object.keys(individual.bansosStatus).length > 0 && (
                           <div>
-                            <p className="text-sm font-medium mb-2">Status Bansos:</p>
+                            <p className="mb-2 text-sm font-medium">Status Bansos:</p>
                             <div className="space-y-1">
                               {Object.entries(individual.bansosStatus).map(([program, status]) => (
-                                <div key={program} className="flex justify-between items-center text-sm">
+                                <div
+                                  key={program}
+                                  className="flex items-center justify-between text-sm">
                                   <span>{program}</span>
                                   <div className="text-right">
-                                    <Badge variant={status.eligible ? "default" : "secondary"} className="text-xs">
-                                      {status.eligible ? `Rp ${status.amount.toLocaleString()}` : 'Tidak Layak'}
+                                    <Badge
+                                      variant={status.eligible ? 'default' : 'secondary'}
+                                      className="text-xs">
+                                      {status.eligible
+                                        ? `Rp ${status.amount.toLocaleString()}`
+                                        : 'Tidak Layak'}
                                     </Badge>
                                     {status.eligible && (
                                       <p className="text-xs text-gray-500">
-                                        Terakhir: {new Date(status.lastReceived).toLocaleDateString('id-ID')}
+                                        Terakhir:{' '}
+                                        {new Date(status.lastReceived).toLocaleDateString('id-ID')}
                                       </p>
                                     )}
                                   </div>
@@ -306,10 +323,12 @@ export default function MapRumahPage() {
               </>
             ) : (
               <Card>
-                <CardContent className="text-center py-12">
-                  <Home className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Pilih Rumah</h3>
-                  <p className="text-gray-600">Klik pada rumah di peta untuk melihat detail keluarga dan anggotanya</p>
+                <CardContent className="py-12 text-center">
+                  <Home className="mx-auto mb-4 h-12 w-12 text-gray-400" />
+                  <h3 className="mb-2 text-lg font-medium text-gray-900">Pilih Rumah</h3>
+                  <p className="text-gray-600">
+                    Klik pada rumah di peta untuk melihat detail keluarga dan anggotanya
+                  </p>
                 </CardContent>
               </Card>
             )}
@@ -323,8 +342,8 @@ export default function MapRumahPage() {
                 <CardTitle>AI Assistant - Analisis Rumah Tangga</CardTitle>
               </CardHeader>
               <CardContent>
-                <ChatbotInterface 
-                  selectedRegion={selectedHouse} 
+                <ChatbotInterface
+                  selectedRegion={selectedHouse}
                   context="house"
                   placeholder="Tanyakan tentang rumah yang dipilih atau analisis kebutuhan bansos..."
                 />

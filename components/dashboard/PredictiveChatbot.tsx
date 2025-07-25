@@ -1,16 +1,11 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import {
-  Bot,
-  Lightbulb,
-  Send,
-  User
-} from 'lucide-react';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Bot, Send, User, TrendingUp, BarChart3, Calendar, Target, Lightbulb } from 'lucide-react';
 
 interface PredictiveChatbotProps {
   mode: string;
@@ -23,28 +18,33 @@ interface ChatMessage {
   content: string;
   timestamp: Date;
   analysisType?: string;
-  data?: unknown;
+  data?: any;
 }
 
-export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
+export function PredictiveChatbot({ mode, onModeChange }: PredictiveChatbotProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
       role: 'assistant',
       content: `Halo! Saya adalah AI Predictive Assistant. Saat ini dalam mode "${getModeLabel(mode)}". Saya dapat membantu Anda dengan analisis prediktif dan proyeksi data bansos. Apa yang ingin Anda analisis?`,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   function getModeLabel(mode: string) {
     switch (mode) {
-      case 'demographic-forecast': return 'Proyeksi Demografi';
-      case 'economic-projection': return 'Proyeksi Ekonomi';
-      case 'seasonal-forecast': return 'Prediksi Musiman';
-      case 'policy-impact': return 'Simulasi Kebijakan';
-      default: return mode;
+      case 'demographic-forecast':
+        return 'Proyeksi Demografi';
+      case 'economic-projection':
+        return 'Proyeksi Ekonomi';
+      case 'seasonal-forecast':
+        return 'Prediksi Musiman';
+      case 'policy-impact':
+        return 'Simulasi Kebijakan';
+      default:
+        return mode;
     }
   }
 
@@ -55,17 +55,17 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
       id: Date.now().toString(),
       role: 'user',
       content: inputMessage,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputMessage('');
     setIsLoading(true);
 
     // Simulate AI response
     setTimeout(() => {
       const aiResponse = generateAIResponse(inputMessage, mode);
-      setMessages(prev => [...prev, aiResponse]);
+      setMessages((prev) => [...prev, aiResponse]);
       setIsLoading(false);
     }, 1500);
   };
@@ -73,7 +73,7 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
   const generateAIResponse = (query: string, mode: string): ChatMessage => {
     let content = '';
     let analysisType = '';
-    const data = null;
+    let data = null;
 
     switch (mode) {
       case 'demographic-forecast':
@@ -164,7 +164,8 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
         break;
 
       default:
-        content = 'Maaf, saya belum dapat memproses permintaan tersebut. Silakan coba dengan pertanyaan yang lebih spesifik terkait prediksi dan proyeksi data bansos.';
+        content =
+          'Maaf, saya belum dapat memproses permintaan tersebut. Silakan coba dengan pertanyaan yang lebih spesifik terkait prediksi dan proyeksi data bansos.';
     }
 
     return {
@@ -173,7 +174,7 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
       content,
       timestamp: new Date(),
       analysisType,
-      data
+      data,
     };
   };
 
@@ -181,48 +182,40 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
     'demographic-forecast': [
       'Proyeksikan jumlah keluarga miskin 5 tahun ke depan',
       'Bagaimana tren kelahiran mempengaruhi kebutuhan PIP?',
-      'Estimasi perubahan struktur usia penduduk'
+      'Estimasi perubahan struktur usia penduduk',
     ],
     'economic-projection': [
       'Dampak inflasi 5% terhadap daya beli masyarakat miskin',
       'Proyeksi kebutuhan BST jika harga pangan naik 15%',
-      'Analisis cost-benefit program baru'
+      'Analisis cost-benefit program baru',
     ],
     'seasonal-forecast': [
       'Prediksi kebutuhan bantuan saat musim kemarau',
       'Proyeksi lonjakan permintaan menjelang hari raya',
-      'Estimasi dampak musim hujan terhadap BPNT'
+      'Estimasi dampak musim hujan terhadap BPNT',
     ],
     'policy-impact': [
       'Simulasi perubahan kriteria penerima PKH',
       'Dampak digitalisasi penuh terhadap efisiensi',
-      'Proyeksi efektivitas program bantuan baru'
-    ]
+      'Proyeksi efektivitas program bantuan baru',
+    ],
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex h-full flex-col">
       {/* Chat Messages */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+      <div className="mb-4 flex-1 space-y-4 overflow-y-auto">
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div
               className={`max-w-[80%] rounded-lg p-3 ${
-                message.role === 'user'
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-100 text-gray-900'
-              }`}
-            >
+                message.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-900'
+              }`}>
               <div className="flex items-start gap-2">
-                {message.role === 'assistant' && (
-                  <Bot className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                )}
-                {message.role === 'user' && (
-                  <User className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                )}
+                {message.role === 'assistant' && <Bot className="mt-0.5 h-5 w-5 flex-shrink-0" />}
+                {message.role === 'user' && <User className="mt-0.5 h-5 w-5 flex-shrink-0" />}
                 <div className="flex-1">
                   {message.analysisType && (
                     <Badge variant="outline" className="mb-2">
@@ -230,7 +223,7 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
                     </Badge>
                   )}
                   <div className="whitespace-pre-wrap text-sm">{message.content}</div>
-                  <div className="text-xs opacity-70 mt-1">
+                  <div className="mt-1 text-xs opacity-70">
                     {message.timestamp.toLocaleTimeString('id-ID')}
                   </div>
                 </div>
@@ -238,16 +231,20 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
             </div>
           </div>
         ))}
-        
+
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg p-3">
+            <div className="rounded-lg bg-gray-100 p-3">
               <div className="flex items-center gap-2">
                 <Bot className="h-5 w-5" />
                 <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-gray-400"></div>
+                  <div
+                    className="h-2 w-2 animate-bounce rounded-full bg-gray-400"
+                    style={{ animationDelay: '0.1s' }}></div>
+                  <div
+                    className="h-2 w-2 animate-bounce rounded-full bg-gray-400"
+                    style={{ animationDelay: '0.2s' }}></div>
                 </div>
               </div>
             </div>
@@ -258,7 +255,7 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
       {/* Example Questions */}
       <Card className="mb-4">
         <CardContent className="p-3">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="mb-2 flex items-center gap-2">
             <Lightbulb className="h-4 w-4 text-yellow-500" />
             <span className="text-sm font-medium">Contoh pertanyaan:</span>
           </div>
@@ -267,8 +264,7 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
               <button
                 key={index}
                 onClick={() => setInputMessage(question)}
-                className="text-left w-full text-xs text-blue-600 hover:text-blue-800 p-1 rounded hover:bg-blue-50"
-              >
+                className="w-full rounded p-1 text-left text-xs text-blue-600 hover:bg-blue-50 hover:text-blue-800">
                 • {question}
               </button>
             ))}
@@ -285,10 +281,7 @@ export function PredictiveChatbot({ mode }: PredictiveChatbotProps) {
           onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
           disabled={isLoading}
         />
-        <Button 
-          onClick={handleSendMessage}
-          disabled={!inputMessage.trim() || isLoading}
-        >
+        <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading}>
           <Send className="h-4 w-4" />
         </Button>
       </div>

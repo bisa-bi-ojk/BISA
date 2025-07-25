@@ -1,31 +1,31 @@
 'use client';
 
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
+import { useAuth } from '@/hooks/use-auth';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
-import { useAuth } from '@/hooks/use-auth';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
-  AlertCircle,
+  User,
   ArrowLeft,
-  Calendar,
-  CheckCircle,
-  Eye,
-  EyeOff,
+  Save,
   Lock,
   Mail,
-  MapPin,
   Phone,
-  Save,
+  Calendar,
+  MapPin,
   Shield,
-  User
+  CheckCircle,
+  AlertCircle,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 export default function ProfilePage() {
   const { user, isLoggedIn, isLoading } = useAuth();
@@ -34,7 +34,7 @@ export default function ProfilePage() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
+
   const [profileData, setProfileData] = useState({
     fullName: '',
     email: '',
@@ -42,13 +42,13 @@ export default function ProfilePage() {
     address: '',
     dateOfBirth: '',
     occupation: '',
-    bio: ''
+    bio: '',
   });
-  
+
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
@@ -73,7 +73,7 @@ export default function ProfilePage() {
         address: user.address || '',
         dateOfBirth: user.dateOfBirth || '',
         occupation: user.occupation || '',
-        bio: user.bio || ''
+        bio: user.bio || '',
       });
     }
   }, [user]);
@@ -89,10 +89,10 @@ export default function ProfilePage() {
     setProfileSuccess('');
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       setProfileSuccess('Profil berhasil diperbarui!');
-    } catch {
+    } catch (error) {
       setProfileError('Gagal memperbarui profil. Silakan coba lagi.');
     } finally {
       setIsUpdatingProfile(false);
@@ -118,15 +118,15 @@ export default function ProfilePage() {
     }
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       setPasswordSuccess('Password berhasil diperbarui!');
       setPasswordData({
         currentPassword: '',
         newPassword: '',
-        confirmPassword: ''
+        confirmPassword: '',
       });
-    } catch {
+    } catch (error) {
       setPasswordError('Gagal memperbarui password. Silakan coba lagi.');
     } finally {
       setIsUpdatingPassword(false);
@@ -135,9 +135,9 @@ export default function ProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#3E9EDB] mx-auto"></div>
+          <div className="mx-auto h-32 w-32 animate-spin rounded-full border-b-2 border-[#3E9EDB]"></div>
           <p className="mt-4 text-gray-600">Memuat...</p>
         </div>
       </div>
@@ -145,21 +145,16 @@ export default function ProfilePage() {
   }
 
   if (!isLoggedIn) {
-    return null; 
+    return null;
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="border-b bg-white shadow-sm">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center py-6">
-            <Button
-              onClick={handleBackToDashboard}
-              variant="ghost"
-              size="sm"
-              className="mr-4"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
+            <Button onClick={handleBackToDashboard} variant="ghost" size="sm" className="mr-4">
+              <ArrowLeft className="mr-2 h-4 w-4" />
               Kembali ke Dashboard
             </Button>
             <div>
@@ -170,7 +165,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="profile" className="flex items-center gap-2">
@@ -206,12 +201,14 @@ export default function ProfilePage() {
                       <Input
                         id="fullName"
                         value={profileData.fullName}
-                        onChange={(e) => setProfileData({...profileData, fullName: e.target.value})}
+                        onChange={(e) =>
+                          setProfileData({ ...profileData, fullName: e.target.value })
+                        }
                         placeholder="Masukkan nama lengkap"
                         required
                       />
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
                       <div className="relative">
@@ -221,7 +218,9 @@ export default function ProfilePage() {
                           type="email"
                           className="pl-10"
                           value={profileData.email}
-                          onChange={(e) => setProfileData({...profileData, email: e.target.value})}
+                          onChange={(e) =>
+                            setProfileData({ ...profileData, email: e.target.value })
+                          }
                           placeholder="email@example.com"
                           required
                         />
@@ -237,7 +236,9 @@ export default function ProfilePage() {
                           type="tel"
                           className="pl-10"
                           value={profileData.phone}
-                          onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
+                          onChange={(e) =>
+                            setProfileData({ ...profileData, phone: e.target.value })
+                          }
                           placeholder="+62 812 3456 7890"
                         />
                       </div>
@@ -252,7 +253,9 @@ export default function ProfilePage() {
                           type="date"
                           className="pl-10"
                           value={profileData.dateOfBirth}
-                          onChange={(e) => setProfileData({...profileData, dateOfBirth: e.target.value})}
+                          onChange={(e) =>
+                            setProfileData({ ...profileData, dateOfBirth: e.target.value })
+                          }
                         />
                       </div>
                     </div>
@@ -262,7 +265,9 @@ export default function ProfilePage() {
                       <Input
                         id="occupation"
                         value={profileData.occupation}
-                        onChange={(e) => setProfileData({...profileData, occupation: e.target.value})}
+                        onChange={(e) =>
+                          setProfileData({ ...profileData, occupation: e.target.value })
+                        }
                         placeholder="Masukkan pekerjaan"
                       />
                     </div>
@@ -276,7 +281,9 @@ export default function ProfilePage() {
                         id="address"
                         className="pl-10"
                         value={profileData.address}
-                        onChange={(e) => setProfileData({...profileData, address: e.target.value})}
+                        onChange={(e) =>
+                          setProfileData({ ...profileData, address: e.target.value })
+                        }
                         placeholder="Masukkan alamat lengkap"
                         rows={3}
                       />
@@ -288,7 +295,7 @@ export default function ProfilePage() {
                     <Textarea
                       id="bio"
                       value={profileData.bio}
-                      onChange={(e) => setProfileData({...profileData, bio: e.target.value})}
+                      onChange={(e) => setProfileData({ ...profileData, bio: e.target.value })}
                       placeholder="Ceritakan sedikit tentang diri Anda"
                       rows={4}
                     />
@@ -311,12 +318,12 @@ export default function ProfilePage() {
                   <Button type="submit" disabled={isUpdatingProfile} className="w-full sm:w-auto">
                     {isUpdatingProfile ? (
                       <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-b-2 border-white"></div>
                         Menyimpan...
                       </>
                     ) : (
                       <>
-                        <Save className="h-4 w-4 mr-2" />
+                        <Save className="mr-2 h-4 w-4" />
                         Simpan Perubahan
                       </>
                     )}
@@ -345,10 +352,12 @@ export default function ProfilePage() {
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
                         id="currentPassword"
-                        type={showCurrentPassword ? "text" : "password"}
+                        type={showCurrentPassword ? 'text' : 'password'}
                         className="pl-10 pr-10"
                         value={passwordData.currentPassword}
-                        onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
+                        onChange={(e) =>
+                          setPasswordData({ ...passwordData, currentPassword: e.target.value })
+                        }
                         placeholder="Masukkan password saat ini"
                         required
                       />
@@ -357,8 +366,7 @@ export default function ProfilePage() {
                         variant="ghost"
                         size="sm"
                         className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                      >
+                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}>
                         {showCurrentPassword ? (
                           <EyeOff className="h-4 w-4" />
                         ) : (
@@ -374,10 +382,12 @@ export default function ProfilePage() {
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
                         id="newPassword"
-                        type={showNewPassword ? "text" : "password"}
+                        type={showNewPassword ? 'text' : 'password'}
                         className="pl-10 pr-10"
                         value={passwordData.newPassword}
-                        onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                        onChange={(e) =>
+                          setPasswordData({ ...passwordData, newPassword: e.target.value })
+                        }
                         placeholder="Masukkan password baru"
                         required
                       />
@@ -386,8 +396,7 @@ export default function ProfilePage() {
                         variant="ghost"
                         size="sm"
                         className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                        onClick={() => setShowNewPassword(!showNewPassword)}
-                      >
+                        onClick={() => setShowNewPassword(!showNewPassword)}>
                         {showNewPassword ? (
                           <EyeOff className="h-4 w-4" />
                         ) : (
@@ -395,9 +404,7 @@ export default function ProfilePage() {
                         )}
                       </Button>
                     </div>
-                    <p className="text-xs text-gray-500">
-                      Password harus minimal 8 karakter
-                    </p>
+                    <p className="text-xs text-gray-500">Password harus minimal 8 karakter</p>
                   </div>
 
                   <div className="space-y-2">
@@ -406,10 +413,12 @@ export default function ProfilePage() {
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
                         id="confirmPassword"
-                        type={showConfirmPassword ? "text" : "password"}
+                        type={showConfirmPassword ? 'text' : 'password'}
                         className="pl-10 pr-10"
                         value={passwordData.confirmPassword}
-                        onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
+                        onChange={(e) =>
+                          setPasswordData({ ...passwordData, confirmPassword: e.target.value })
+                        }
                         placeholder="Ulangi password baru"
                         required
                       />
@@ -418,8 +427,7 @@ export default function ProfilePage() {
                         variant="ghost"
                         size="sm"
                         className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      >
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
                         {showConfirmPassword ? (
                           <EyeOff className="h-4 w-4" />
                         ) : (
@@ -446,12 +454,12 @@ export default function ProfilePage() {
                   <Button type="submit" disabled={isUpdatingPassword} className="w-full sm:w-auto">
                     {isUpdatingPassword ? (
                       <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-b-2 border-white"></div>
                         Mengubah Password...
                       </>
                     ) : (
                       <>
-                        <Lock className="h-4 w-4 mr-2" />
+                        <Lock className="mr-2 h-4 w-4" />
                         Ubah Password
                       </>
                     )}
@@ -470,7 +478,7 @@ export default function ProfilePage() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                    <CheckCircle className="mt-0.5 h-5 w-5 text-green-500" />
                     <div>
                       <p className="font-medium">Password Kuat</p>
                       <p className="text-sm text-gray-600">
@@ -478,9 +486,9 @@ export default function ProfilePage() {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5" />
+                    <CheckCircle className="mt-0.5 h-5 w-5 text-green-500" />
                     <div>
                       <p className="font-medium">Jangan Bagikan Password</p>
                       <p className="text-sm text-gray-600">
@@ -488,9 +496,9 @@ export default function ProfilePage() {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-3">
-                    <AlertCircle className="h-5 w-5 text-yellow-500 mt-0.5" />
+                    <AlertCircle className="mt-0.5 h-5 w-5 text-yellow-500" />
                     <div>
                       <p className="font-medium">Ubah Password Secara Berkala</p>
                       <p className="text-sm text-gray-600">
@@ -516,7 +524,7 @@ export default function ProfilePage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex items-center justify-between rounded-lg border p-4">
                     <div className="flex items-center gap-3">
                       <Mail className="h-5 w-5 text-blue-500" />
                       <div>
@@ -527,13 +535,13 @@ export default function ProfilePage() {
                     <div className="flex items-center gap-2">
                       {user?.emailVerified ? (
                         <Badge className="bg-green-100 text-green-800">
-                          <CheckCircle className="h-3 w-3 mr-1" />
+                          <CheckCircle className="mr-1 h-3 w-3" />
                           Terverifikasi
                         </Badge>
                       ) : (
                         <>
                           <Badge variant="destructive">
-                            <AlertCircle className="h-3 w-3 mr-1" />
+                            <AlertCircle className="mr-1 h-3 w-3" />
                             Belum Terverifikasi
                           </Badge>
                           <Button size="sm" variant="outline">
@@ -544,7 +552,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex items-center justify-between rounded-lg border p-4">
                     <div className="flex items-center gap-3">
                       <Phone className="h-5 w-5 text-green-500" />
                       <div>
@@ -555,13 +563,13 @@ export default function ProfilePage() {
                     <div className="flex items-center gap-2">
                       {user?.phoneVerified ? (
                         <Badge className="bg-green-100 text-green-800">
-                          <CheckCircle className="h-3 w-3 mr-1" />
+                          <CheckCircle className="mr-1 h-3 w-3" />
                           Terverifikasi
                         </Badge>
                       ) : (
                         <>
                           <Badge variant="secondary">
-                            <AlertCircle className="h-3 w-3 mr-1" />
+                            <AlertCircle className="mr-1 h-3 w-3" />
                             Belum Terverifikasi
                           </Badge>
                           <Button size="sm" variant="outline">
@@ -572,7 +580,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                  <div className="flex items-center justify-between rounded-lg border p-4">
                     <div className="flex items-center gap-3">
                       <User className="h-5 w-5 text-purple-500" />
                       <div>
@@ -582,7 +590,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge variant="secondary">
-                        <AlertCircle className="h-3 w-3 mr-1" />
+                        <AlertCircle className="mr-1 h-3 w-3" />
                         Belum Terverifikasi
                       </Badge>
                       <Button size="sm" variant="outline">
@@ -592,12 +600,12 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                <div className="mt-6 rounded-lg bg-blue-50 p-4">
                   <div className="flex items-start gap-3">
-                    <Shield className="h-5 w-5 text-blue-500 mt-0.5" />
+                    <Shield className="mt-0.5 h-5 w-5 text-blue-500" />
                     <div>
                       <p className="font-medium text-blue-900">Mengapa Verifikasi Penting?</p>
-                      <ul className="text-sm text-blue-800 mt-2 space-y-1">
+                      <ul className="mt-2 space-y-1 text-sm text-blue-800">
                         <li>• Meningkatkan keamanan akun Anda</li>
                         <li>• Akses ke semua fitur bantuan sosial</li>
                         <li>• Mempercepat proses persetujuan pengajuan</li>

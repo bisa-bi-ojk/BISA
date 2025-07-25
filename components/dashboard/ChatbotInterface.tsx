@@ -1,13 +1,13 @@
 'use client';
 
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { MessageSquare, Send, Bot, User, Lightbulb, TrendingUp } from 'lucide-react';
 import { chatbotSampleConversations } from '@/lib/constants/dashboard/dashboardData';
 import { ChatMessage } from '@/lib/types/dashboard';
-import { Bot, Lightbulb, MessageSquare, Send, TrendingUp, User } from 'lucide-react';
-import { useState } from 'react';
 
 interface ChatbotInterfaceProps {
   selectedRegion?: string | null;
@@ -15,7 +15,11 @@ interface ChatbotInterfaceProps {
   placeholder?: string;
 }
 
-export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfaceProps) {
+export function ChatbotInterface({
+  selectedRegion,
+  context = 'general',
+  placeholder,
+}: ChatbotInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>(chatbotSampleConversations);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -26,10 +30,10 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
     const userMessage: ChatMessage = {
       type: 'user',
       message: inputValue,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue('');
     setIsTyping(true);
 
@@ -37,18 +41,19 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
     setTimeout(() => {
       const aiResponse: ChatMessage = {
         type: 'ai',
-        message: 'Berdasarkan analisis data terkini dan model ML kami, berikut adalah prediksi dampak kebijakan yang Anda tanyakan:',
+        message:
+          'Berdasarkan analisis data terkini dan model ML kami, berikut adalah prediksi dampak kebijakan yang Anda tanyakan:',
         predictions: [
           { icon: '📊', metric: 'Tingkat partisipasi program', value: 'Naik 7.3%' },
           { icon: '💰', metric: 'Alokasi anggaran optimal', value: '+Rp 2.1M' },
           { icon: '🎯', metric: 'Efektivitas targeting', value: 'Meningkat 12%' },
-          { icon: '⏱️', metric: 'Waktu implementasi', value: '3-4 bulan' }
+          { icon: '⏱️', metric: 'Waktu implementasi', value: '3-4 bulan' },
         ],
         note: '*Prediksi berdasarkan model yang dilatih dengan data 2017-2024',
-        timestamp: new Date()
+        timestamp: new Date(),
       };
-      
-      setMessages(prev => [...prev, aiResponse]);
+
+      setMessages((prev) => [...prev, aiResponse]);
       setIsTyping(false);
     }, 2000);
   };
@@ -58,10 +63,10 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
   };
 
   const quickQuestions = [
-    "Dampak kenaikan bantuan sosial 10% di Jawa Timur?",
-    "Prediksi harga beras jika subsidi naik?",
-    "Efektivitas program PKH vs BST?",
-    "Analisis kemiskinan regional terbaru?"
+    'Dampak kenaikan bantuan sosial 10% di Jawa Timur?',
+    'Prediksi harga beras jika subsidi naik?',
+    'Efektivitas program PKH vs BST?',
+    'Analisis kemiskinan regional terbaru?',
   ];
 
   return (
@@ -81,33 +86,44 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
           <CardContent>
             <div className="space-y-4">
               {/* Chat Messages */}
-              <div className="h-96 bg-gray-50 rounded-lg border p-4 overflow-y-auto space-y-4">
+              <div className="h-96 space-y-4 overflow-y-auto rounded-lg border bg-gray-50 p-4">
                 {messages.map((message, index) => (
-                  <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[80%] ${message.type === 'user' ? 'bg-blue-500 text-white' : 'bg-white border'} rounded-lg p-3 shadow-sm`}>
-                      <div className="flex items-start gap-2 mb-2">
-                        {message.type === 'ai' ? <Bot className="h-4 w-4 mt-0.5 text-blue-500" /> : <User className="h-4 w-4 mt-0.5" />}
-                        <span className="font-medium text-xs">
+                  <div
+                    key={index}
+                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div
+                      className={`max-w-[80%] ${message.type === 'user' ? 'bg-blue-500 text-white' : 'border bg-white'} rounded-lg p-3 shadow-sm`}>
+                      <div className="mb-2 flex items-start gap-2">
+                        {message.type === 'ai' ? (
+                          <Bot className="mt-0.5 h-4 w-4 text-blue-500" />
+                        ) : (
+                          <User className="mt-0.5 h-4 w-4" />
+                        )}
+                        <span className="text-xs font-medium">
                           {message.type === 'ai' ? 'AI Assistant' : 'Anda'}
                         </span>
                       </div>
-                      
+
                       <p className="text-sm">{message.message}</p>
-                      
+
                       {message.suggestions && (
                         <div className="mt-3 space-y-1">
                           {message.suggestions.map((suggestion, idx) => (
-                            <div key={idx} className="text-xs bg-blue-50 p-2 rounded border-l-2 border-blue-200">
+                            <div
+                              key={idx}
+                              className="rounded border-l-2 border-blue-200 bg-blue-50 p-2 text-xs">
                               • {suggestion}
                             </div>
                           ))}
                         </div>
                       )}
-                      
+
                       {message.predictions && (
                         <div className="mt-3 space-y-2">
                           {message.predictions.map((prediction, idx) => (
-                            <div key={idx} className="flex items-center justify-between p-2 bg-green-50 rounded text-xs">
+                            <div
+                              key={idx}
+                              className="flex items-center justify-between rounded bg-green-50 p-2 text-xs">
                               <span className="flex items-center gap-1">
                                 <span>{prediction.icon}</span>
                                 <strong>{prediction.metric}:</strong>
@@ -117,61 +133,64 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
                           ))}
                         </div>
                       )}
-                      
+
                       {message.note && (
-                        <p className="text-xs text-gray-500 mt-2 italic">{message.note}</p>
+                        <p className="mt-2 text-xs italic text-gray-500">{message.note}</p>
                       )}
-                      
+
                       {message.timestamp && (
-                        <p className="text-xs text-gray-400 mt-1">
+                        <p className="mt-1 text-xs text-gray-400">
                           {message.timestamp.toLocaleTimeString()}
                         </p>
                       )}
                     </div>
                   </div>
                 ))}
-                
+
                 {isTyping && (
                   <div className="flex justify-start">
-                    <div className="bg-white border rounded-lg p-3 shadow-sm">
+                    <div className="rounded-lg border bg-white p-3 shadow-sm">
                       <div className="flex items-center gap-2">
                         <Bot className="h-4 w-4 text-blue-500" />
                         <div className="flex gap-1">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
-                          <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                          <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                          <div className="h-2 w-2 animate-bounce rounded-full bg-blue-500"></div>
+                          <div
+                            className="h-2 w-2 animate-bounce rounded-full bg-blue-500"
+                            style={{ animationDelay: '0.1s' }}></div>
+                          <div
+                            className="h-2 w-2 animate-bounce rounded-full bg-blue-500"
+                            style={{ animationDelay: '0.2s' }}></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
-              
+
               {/* Quick Questions */}
               <div className="space-y-2">
-                <p className="text-xs text-gray-500 font-medium">Pertanyaan Cepat:</p>
+                <p className="text-xs font-medium text-gray-500">Pertanyaan Cepat:</p>
                 <div className="grid grid-cols-2 gap-2">
                   {quickQuestions.map((question, index) => (
                     <Button
                       key={index}
                       variant="outline"
                       size="sm"
-                      className="text-xs h-auto p-2 text-left justify-start"
-                      onClick={() => handleSuggestionClick(question)}
-                    >
-                      <Lightbulb className="h-3 w-3 mr-1 flex-shrink-0" />
+                      className="h-auto justify-start p-2 text-left text-xs"
+                      onClick={() => handleSuggestionClick(question)}>
+                      <Lightbulb className="mr-1 h-3 w-3 flex-shrink-0" />
                       {question}
                     </Button>
                   ))}
                 </div>
               </div>
-              
+
               {/* Input */}
               <div className="flex gap-2">
                 <Input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder={placeholder || "Tanyakan tentang dampak kebijakan..."}
+                  placeholder={placeholder || 'Tanyakan tentang dampak kebijakan...'}
                   className="flex-1"
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 />
@@ -208,7 +227,7 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
         {/* Model Performance */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-sm">
               <TrendingUp className="h-4 w-4" />
               Performa Model AI
             </CardTitle>
@@ -220,35 +239,39 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
                   <span>Prediksi Kebijakan</span>
                   <span className="font-medium">92.5%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5">
-                  <div className="bg-green-500 h-1.5 rounded-full" style={{width: '92.5%'}}></div>
+                <div className="h-1.5 w-full rounded-full bg-gray-200">
+                  <div className="h-1.5 rounded-full bg-green-500" style={{ width: '92.5%' }}></div>
                 </div>
               </div>
-              
+
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <span>Analisis Ekonomi</span>
                   <span className="font-medium">89.3%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5">
-                  <div className="bg-blue-500 h-1.5 rounded-full" style={{width: '89.3%'}}></div>
+                <div className="h-1.5 w-full rounded-full bg-gray-200">
+                  <div className="h-1.5 rounded-full bg-blue-500" style={{ width: '89.3%' }}></div>
                 </div>
               </div>
-              
+
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <span>Forecasting</span>
                   <span className="font-medium">87.8%</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-1.5">
-                  <div className="bg-purple-500 h-1.5 rounded-full" style={{width: '87.8%'}}></div>
+                <div className="h-1.5 w-full rounded-full bg-gray-200">
+                  <div
+                    className="h-1.5 rounded-full bg-purple-500"
+                    style={{ width: '87.8%' }}></div>
                 </div>
               </div>
             </div>
-            
-            <div className="mt-4 p-2 bg-blue-50 rounded text-xs">
+
+            <div className="mt-4 rounded bg-blue-50 p-2 text-xs">
               <p className="font-medium text-blue-900">💡 Tips:</p>
-              <p className="text-blue-800">Semakin spesifik pertanyaan, semakin akurat analisis yang diberikan</p>
+              <p className="text-blue-800">
+                Semakin spesifik pertanyaan, semakin akurat analisis yang diberikan
+              </p>
             </div>
           </CardContent>
         </Card>
@@ -261,21 +284,21 @@ export function ChatbotInterface({ selectedRegion, placeholder }: ChatbotInterfa
           <CardContent>
             <div className="space-y-3 text-xs">
               <div className="flex items-start gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-green-500"></div>
                 <div>
                   <p className="font-medium">Model v3.2 Deployed</p>
                   <p className="text-gray-600">Akurasi prediksi meningkat 5%</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
                 <div>
                   <p className="font-medium">Data Refresh</p>
                   <p className="text-gray-600">Dataset terbaru dari BPS 2024</p>
                 </div>
               </div>
               <div className="flex items-start gap-2">
-                <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                <div className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-purple-500"></div>
                 <div>
                   <p className="font-medium">New Features</p>
                   <p className="text-gray-600">Regional context analysis</p>

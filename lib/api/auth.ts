@@ -86,8 +86,6 @@ const apiRequest = async <T>(endpoint: string, options: RequestInit = {}): Promi
       ...defaultHeaders,
       ...options.headers,
     },
-    // Add timeout for better error handling
-    signal: AbortSignal.timeout(10000), // 10 second timeout
   };
 
   try {
@@ -105,13 +103,6 @@ const apiRequest = async <T>(endpoint: string, options: RequestInit = {}): Promi
     return response.text() as T;
   } catch (error) {
     if (error instanceof Error) {
-      // Handle network errors more gracefully
-      if (error.name === 'AbortError') {
-        throw new Error('Request timeout - please check your connection');
-      }
-      if (error.message.includes('Failed to fetch')) {
-        throw new Error('Network error - please check your connection');
-      }
       throw error;
     }
     throw new Error('Network error occurred');
@@ -182,18 +173,12 @@ export const getProfile = async (): Promise<User> => {
     throw new Error('No authentication token found');
   }
 
-  try {
-    return await apiRequest<User>('/auth/profile', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (error) {
-    // If profile fetch fails, remove the invalid token
-    removeAuthToken();
-    throw error;
-  }
+  return apiRequest<User>('/auth/profile', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const verifyEmail = async (token: string): Promise<{ message: string }> => {
