@@ -56,7 +56,13 @@ export default function LoginPage() {
         <CardContent className="p-8">
           <div className="mb-8 text-center">
             <div className="mb-6 flex justify-center">
-              <Image width={64} height={64} className="h-16 w-16 object-contain" alt="BISA Logo" src="/logo-bg-white.png" />
+              <Image
+                width={64}
+                height={64}
+                className="h-16 w-16 object-contain"
+                alt="Logo"
+                src="/logo-white.png"
+              />
             </div>
 
             <h1 className="mb-2 text-2xl font-bold text-gray-900">Masuk ke Sistem BISA</h1>

@@ -65,11 +65,11 @@ export default function SignUpPage() {
           <div className="flex w-full max-w-[384px] flex-col items-center gap-6">
             <div className="inline-flex items-center gap-4">
               <Image
-                width={48}
-                height={48}
-                className="h-12 w-12 object-cover"
+                width={64}
+                height={64}
+                className="h-16 w-16 object-contain"
                 alt="Logo"
-                src="/logo.png"
+                src="/logo-white.png"
               />
             </div>
 

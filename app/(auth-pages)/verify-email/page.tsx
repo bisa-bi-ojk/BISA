@@ -7,7 +7,7 @@ import { AlertCircle, ArrowLeft, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 function VerifyEmailContent() {
   const [isLoading, setIsLoading] = useState(true);
@@ -77,7 +77,13 @@ function VerifyEmailContent() {
         <CardContent className="p-8">
           <div className="mb-8 text-center">
             <div className="mb-6 flex justify-center">
-              <Image width={64} height={64} className="h-16 w-16 object-contain" alt="BISA Logo" src="/logo-bg-white.png" />
+              <Image
+                width={64}
+                height={64}
+                className="h-16 w-16 object-contain"
+                alt="Logo"
+                src="/logo-white.png"
+              />
             </div>
 
             <div className="mb-6">
