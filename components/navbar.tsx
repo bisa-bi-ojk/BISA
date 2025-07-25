@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, isLoggedIn, logout } = useAuth();
+  const { user, isLoggedIn, logout, isMounted } = useAuth();
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
@@ -70,7 +70,9 @@ export function Navbar() {
 
           {/* Desktop Auth Section */}
           <div className="hidden items-center gap-4 sm:flex">
-            {isLoggedIn ? (
+            {!isMounted ? (
+              <div className="h-10 w-20 animate-pulse rounded-lg bg-muted"></div>
+            ) : isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
                   <User className="h-4 w-4 text-muted-foreground" />
@@ -129,7 +131,9 @@ export function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
                 className="border-t border-border pt-3">
-                {isLoggedIn ? (
+                {!isMounted ? (
+                  <div className="h-12 w-full animate-pulse rounded-lg bg-muted"></div>
+                ) : isLoggedIn ? (
                   <div className="space-y-3">
                     <div className="flex items-center gap-2 rounded-lg bg-muted px-4 py-2">
                       <User className="h-4 w-4 text-muted-foreground" />

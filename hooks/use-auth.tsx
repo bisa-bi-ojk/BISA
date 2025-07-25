@@ -7,6 +7,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isLoggedIn: boolean;
+  isMounted: boolean;
   login: (user: User) => void;
   logout: () => void;
   refreshUser: () => Promise<void>;
@@ -29,8 +30,15 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
 
   const refreshUser = async () => {
+    // Only check auth on client side
+    if (typeof window === 'undefined') {
+      setIsLoading(false);
+      return;
+    }
+
     if (!isAuthenticated()) {
       setUser(null);
       setIsLoading(false);
@@ -42,7 +50,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(userData);
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
-      // If profile fetch fails, likely token is invalid
+      // If profile fetch fails, likely token is invalid or network error
       removeAuthToken();
       setUser(null);
     } finally {
@@ -60,6 +68,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   useEffect(() => {
+    setIsMounted(true);
     refreshUser();
   }, []);
 
@@ -67,14 +76,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     user,
     isLoading,
     isLoggedIn: !!user,
+    isMounted,
     login,
     logout,
     refreshUser,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
