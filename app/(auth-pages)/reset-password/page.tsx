@@ -1,16 +1,16 @@
 'use client';
 
 import { ArrowLeft, CheckCircle } from 'lucide-react';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
 
+import { ResetPasswordForm } from '@/components/auth/reset-password-form';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ResetPasswordForm } from '@/components/auth/reset-password-form';
 import { resetPassword } from '@/lib/api/auth';
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -121,5 +121,24 @@ export default function ResetPasswordPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen flex-col items-center justify-center bg-white bg-[linear-gradient(270deg,rgba(62,158,219,1)_0%,rgba(36,100,159,1)_100%)] p-8 md:p-20">
+          <Card className="w-full max-w-[480px] rounded-2xl shadow-[0px_8px_32px_#00000020]">
+            <CardContent className="flex flex-col items-center gap-10 p-8 md:p-12">
+              <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-b-2 border-[#3e9edb]"></div>
+              <h1 className="mb-2 text-xl font-semibold text-gray-900">Memuat...</h1>
+              <p className="text-gray-600">Mohon tunggu sebentar...</p>
+            </CardContent>
+          </Card>
+        </div>
+      }>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }

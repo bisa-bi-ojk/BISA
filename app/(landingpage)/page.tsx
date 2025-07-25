@@ -1,26 +1,23 @@
 'use client';
 
-import { Footer } from '@/components/footer';
-import { Button } from '@/components/ui/button';
-import { ShineButton } from '@/components/ui/shine-button';
-import { BackgroundGradient } from '@/components/ui/background-gradient';
-import { AnimatedGradientText } from '@/components/ui/animated-gradient-text';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { RiArrowRightLine } from 'react-icons/ri';
-import { Target, Eye, BarChart3, Users } from 'lucide-react';
 import { FaqSection } from '@/components/faq-section';
-import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { Footer } from '@/components/footer';
+import { AnimatedGradientText } from '@/components/ui/animated-gradient-text';
+import { BackgroundGradient } from '@/components/ui/background-gradient';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
-import { socialAidTestimonials } from '@/lib/constants/landing_page/socialTestimonials';
+import { ShineButton } from '@/components/ui/shine-button';
 import { features } from '@/lib/constants/landing_page/featureLanding';
 import { featureUnggulan } from '@/lib/constants/landing_page/fiturUnggulan';
-import { bisaBekerja } from '@/lib/constants/landing_page/bisaBekerja';
-import { techstack } from '@/lib/constants/landing_page/techStack';
+import { socialAidTestimonials } from '@/lib/constants/landing_page/socialTestimonials';
 import { stats } from '@/lib/constants/landing_page/stats';
+import { techstack } from '@/lib/constants/landing_page/techStack';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { RiArrowRightLine } from 'react-icons/ri';
 
 export default function Home() {
   return (

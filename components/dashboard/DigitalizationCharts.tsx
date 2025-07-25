@@ -2,23 +2,31 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  BarChart,
   Bar,
-  PieChart,
-  Pie,
+  CartesianGrid,
   Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
 } from 'recharts';
 
+interface ChartDataItem {
+  month?: string;
+  digitalized?: number;
+  rate?: number;
+  wallet?: string;
+  percentage?: number;
+  recipients?: number;
+}
+
 interface DigitalizationChartsProps {
-  data: any[];
+  data: ChartDataItem[];
   title: string;
   type: 'line' | 'pie';
 }

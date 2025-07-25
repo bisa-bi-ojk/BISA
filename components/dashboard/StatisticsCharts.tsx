@@ -2,20 +2,39 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
 } from 'recharts';
 
+interface ChartDataPoint {
+  period?: string;
+  month?: string;
+  recipients?: number;
+  amount?: number;
+  accuracy?: number;
+  [key: string]: string | number | undefined;
+}
+
+interface DataItem {
+  program: string;
+  chartData?: ChartDataPoint[];
+  totalRecipients?: number;
+  totalAmount?: number;
+  accuracy?: number;
+  trend?: string;
+  [key: string]: unknown;
+}
+
 interface StatisticsChartsProps {
-  data: any[];
+  data: DataItem[];
   chartType: 'line' | 'bar';
   title: string;
   dataKey: string;
@@ -27,7 +46,7 @@ export function StatisticsCharts({ data, chartType, title, dataKey }: Statistics
     .map((item) => {
       if (item.chartData) {
         // For time series data
-        return item.chartData.map((point: any) => ({
+        return item.chartData.map((point: ChartDataPoint) => ({
           period: point.period || point.month,
           [item.program]: point[dataKey] || point.recipients || point.amount || point.accuracy,
           program: item.program,
@@ -44,17 +63,20 @@ export function StatisticsCharts({ data, chartType, title, dataKey }: Statistics
     .flat();
 
   // Group data by period for line charts
-  const groupedData = chartData.reduce((acc: any, curr: any) => {
-    if (curr.period) {
-      const existing = acc.find((item: any) => item.period === curr.period);
-      if (existing) {
-        Object.assign(existing, { [curr.program]: curr[curr.program] });
-      } else {
-        acc.push({ period: curr.period, [curr.program]: curr[curr.program] });
+  const groupedData = chartData.reduce(
+    (acc: Record<string, unknown>[], curr: Record<string, unknown>) => {
+      if (curr.period) {
+        const existing = acc.find((item: Record<string, unknown>) => item.period === curr.period);
+        if (existing) {
+          Object.assign(existing, { [curr.program]: curr[curr.program] });
+        } else {
+          acc.push({ period: curr.period, [curr.program]: curr[curr.program] });
+        }
       }
-    }
-    return acc;
-  }, []);
+      return acc;
+    },
+    [],
+  );
 
   const finalData = chartType === 'line' ? groupedData : chartData.filter((item) => item.program);
 

@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Bot, Send, User, TrendingUp, BarChart3, Calendar, Target, Lightbulb } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Bot, Lightbulb, Send, User } from 'lucide-react';
+import { useState } from 'react';
 
 interface PredictiveChatbotProps {
   mode: string;
@@ -18,7 +18,7 @@ interface ChatMessage {
   content: string;
   timestamp: Date;
   analysisType?: string;
-  data?: any;
+  data?: Record<string, unknown> | null;
 }
 
 export function PredictiveChatbot({ mode, onModeChange }: PredictiveChatbotProps) {
@@ -73,7 +73,7 @@ export function PredictiveChatbot({ mode, onModeChange }: PredictiveChatbotProps
   const generateAIResponse = (query: string, mode: string): ChatMessage => {
     let content = '';
     let analysisType = '';
-    let data = null;
+    const data: Record<string, unknown> | null = null;
 
     switch (mode) {
       case 'demographic-forecast':
