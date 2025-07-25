@@ -1,46 +1,50 @@
-'use client';
+"use client";
 
-import { FaqSection } from '@/components/faq-section';
-import { Footer } from '@/components/footer';
-import { AnimatedGradientText } from '@/components/ui/animated-gradient-text';
-import { BackgroundGradient } from '@/components/ui/background-gradient';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
-import { ShineButton } from '@/components/ui/shine-button';
-import { features } from '@/lib/constants/landing_page/featureLanding';
-import { featureUnggulan } from '@/lib/constants/landing_page/fiturUnggulan';
-import { socialAidTestimonials } from '@/lib/constants/landing_page/socialTestimonials';
-import { stats } from '@/lib/constants/landing_page/stats';
-import { techstack } from '@/lib/constants/landing_page/techStack';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
-import { RiArrowRightLine } from 'react-icons/ri';
+import { FaqSection } from "@/components/faq-section";
+import { Footer } from "@/components/footer";
+import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
+import { BackgroundGradient } from "@/components/ui/background-gradient";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+import { ShineButton } from "@/components/ui/shine-button";
+import { features } from "@/lib/constants/landing_page/featureLanding";
+import { featureUnggulan } from "@/lib/constants/landing_page/fiturUnggulan";
+import { socialAidTestimonials } from "@/lib/constants/landing_page/socialTestimonials";
+import { stats } from "@/lib/constants/landing_page/stats";
+import { techstack } from "@/lib/constants/landing_page/techStack";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-1 px-5">
-        <section className="md:py-25 relative overflow-hidden py-20">
+        <section className="relative overflow-hidden py-20 md:py-25">
           <BackgroundGradient
             animate={true}
             className="opacity-20"
             containerClassName="absolute inset-0"
           />
           <div className="container relative z-10 mx-auto px-4">
-            <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className="space-y-8">
+                className="space-y-8"
+              >
                 <div className="space-y-4">
                   <Badge className="mb-4 rounded-full px-4 py-1.5 text-sm font-medium">
                     🎯 Platform AI untuk Bantuan Sosial Tepat Sasaran
                   </Badge>
-
+                  
                   <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
                     <span className="block">BISA –</span>
                     <span className="block">
@@ -48,20 +52,22 @@ export default function Home() {
                     </span>
                     <span className="block">& Sasaran Akurat</span>
                   </h1>
-
-                  <p className="max-w-lg text-lg text-muted-foreground md:text-xl">
-                    Platform AI untuk distribusi bantuan sosial yang adil dan akurat. Membantu
-                    instansi pemerintah menyalurkan bantuan tepat sasaran dengan teknologi terdepan.
+                  
+                  <p className="text-lg text-muted-foreground md:text-xl max-w-lg">
+                    Platform AI untuk distribusi bantuan sosial yang adil dan akurat. 
+                    Membantu instansi pemerintah menyalurkan bantuan tepat sasaran 
+                    dengan teknologi terdepan.
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-4 sm:flex-row">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Link href="/dashboard">
-                    <ShineButton
-                      size="lg"
-                      className="h-14 transform border-0 bg-[#3E9EDB] px-10 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2E7BC6] hover:shadow-xl">
+                    <ShineButton 
+                      size="lg" 
+                      className="h-14 px-10 text-white bg-[#3E9EDB] hover:bg-[#2E7BC6] border-0 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" 
+                    >
                       Login ke Dashboard
-                      <RiArrowRightLine className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-5 w-5" />
                     </ShineButton>
                   </Link>
                 </div>
@@ -71,12 +77,13 @@ export default function Home() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative">
-                <div className="relative mx-auto aspect-square w-full max-w-lg">
-                  <div className="absolute -left-4 -top-4 h-20 w-20 animate-pulse rounded-full bg-gradient-to-br from-blue-400 to-purple-600 opacity-20"></div>
-                  <div className="absolute -bottom-4 -right-4 h-16 w-16 animate-pulse rounded-full bg-gradient-to-br from-green-400 to-blue-500 opacity-20 delay-1000"></div>
-                  <div className="absolute -left-8 top-1/2 h-12 w-12 animate-bounce rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 opacity-20"></div>
-
+                className="relative"
+              >
+                <div className="relative aspect-square w-full max-w-lg mx-auto">
+                  <div className="absolute -top-4 -left-4 w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full opacity-20 animate-pulse"></div>
+                  <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-20 animate-pulse delay-1000"></div>
+                  <div className="absolute top-1/2 -left-8 w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 animate-bounce"></div>
+                  
                   <Image
                     src="/hero.png"
                     alt="BISA Platform Dashboard"
@@ -84,18 +91,19 @@ export default function Home() {
                     className="object-contain drop-shadow-2xl"
                     priority
                   />
-
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-white/10 via-transparent to-white/5"></div>
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-white/5 rounded-lg"></div>
                 </div>
-
+                
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
-                  className="absolute -bottom-6 -left-6 rounded-lg border border-gray-100 bg-white p-4 shadow-xl">
+                  className="absolute -bottom-6 -left-6 bg-white rounded-lg shadow-xl p-4 border border-gray-100"
+                >
                   <div className="flex items-center space-x-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
-                      <span className="text-sm font-bold text-green-600">95%</span>
+                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                      <span className="text-green-600 font-bold text-sm">95%</span>
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-gray-800">Akurasi AI</p>
@@ -103,15 +111,16 @@ export default function Home() {
                     </div>
                   </div>
                 </motion.div>
-
+                
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 1.0 }}
-                  className="absolute -right-3 -top-6 rounded-lg border border-gray-100 bg-white p-4 shadow-xl">
+                  className="absolute -top-6 -right-3 bg-white rounded-lg shadow-xl p-4 border border-gray-100"
+                >
                   <div className="flex items-center space-x-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
-                      <span className="text-sm font-bold text-blue-600">50+</span>
+                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span className="text-blue-600 font-bold text-sm">50+</span>
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-gray-800">Instansi</p>
@@ -124,61 +133,63 @@ export default function Home() {
           </div>
         </section>
 
-        <section
-          id="features"
-          className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50 py-20">
-          <div className="absolute left-0 top-0 h-full w-full">
-            <div className="absolute left-10 top-20 h-64 w-64 animate-pulse rounded-full bg-blue-200 opacity-20 mix-blend-multiply blur-xl filter"></div>
-            <div className="absolute right-10 top-40 h-64 w-64 animate-pulse rounded-full bg-purple-200 opacity-20 mix-blend-multiply blur-xl filter delay-1000"></div>
-            <div className="absolute bottom-20 left-1/2 h-64 w-64 animate-pulse rounded-full bg-green-200 opacity-20 mix-blend-multiply blur-xl filter delay-500"></div>
+        <section id="features" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-20 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+            <div className="absolute top-40 right-10 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
+            <div className="absolute bottom-20 left-1/2 w-64 h-64 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-500"></div>
           </div>
-
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-16 text-center">
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-16">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                viewport={{ once: true }}>
+                viewport={{ once: true }}
+              >
                 <Badge className="mb-3" variant="outline">
                   FITUR UNGGULAN
                 </Badge>
-                <h2 className="mb-4 text-3xl font-bold text-gray-900">Fitur Unggulan</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Fitur Unggulan</h2>
                 <p className="text-lg text-gray-600">
                   Teknologi AI terdepan untuk distribusi bantuan sosial yang efektif dan transparan
                 </p>
               </motion.div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map(({ icon: Icon, title, description, color, stats }, index) => (
                 <motion.div
                   key={title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}>
-                  <Card className="group relative h-full overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-sm transition-all duration-500 hover:-translate-y-3 hover:bg-white hover:shadow-2xl">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-green-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <CardContent className="relative z-10 flex h-full flex-col p-8 text-center">
+                  viewport={{ once: true }}
+                >
+                  <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 h-full group bg-white/80 backdrop-blur-sm hover:bg-white relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <CardContent className="p-8 text-center h-full flex flex-col relative z-10">
                       <div
-                        className={`h-16 w-16 ${color} mx-auto mb-6 flex items-center justify-center rounded-2xl shadow-lg transition-all duration-500 group-hover:rotate-3 group-hover:scale-110`}>
+                        className={`w-16 h-16 ${color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg`}
+                      >
                         <Icon
-                          className={`h-6 w-6 ${
-                            color.includes('green') ? 'text-green-600' : 'text-blue-600'
+                          className={`w-6 h-6 ${
+                            color.includes("green") ? "text-green-600" : "text-blue-600"
                           }`}
                         />
                       </div>
-                      <h3 className="mb-4 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-700">
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-700 transition-colors duration-300">
                         {title}
                       </h3>
-                      <p className="mb-6 flex-grow text-base leading-relaxed text-gray-600">
+                      <p className="text-gray-600 text-base leading-relaxed flex-grow mb-6">
                         {description}
                       </p>
                       <div className="mt-auto">
                         <Badge
                           variant="secondary"
-                          className="bg-blue-50 px-4 py-2 text-sm text-blue-700 transition-colors duration-300 group-hover:bg-blue-100">
+                          className="text-sm px-4 py-2 bg-blue-50 text-blue-700 group-hover:bg-blue-100 transition-colors duration-300"
+                        >
                           {stats}
                         </Badge>
                       </div>
@@ -193,7 +204,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
               viewport={{ once: true }}
-              className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
               {featureUnggulan.map((item, index) => (
                 <motion.div
                   key={index}
@@ -201,16 +213,13 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group">
-                  <div className="flex transform items-start space-x-4 rounded-xl border border-gray-100 bg-white/70 p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-gray-200 hover:bg-white hover:shadow-lg">
-                    <div className="text-3xl transition-transform duration-300 group-hover:scale-110">
-                      {item.icon}
-                    </div>
+                  className="group"
+                >
+                  <div className="flex items-start space-x-4 p-6 rounded-xl bg-white/70 backdrop-blur-sm hover:bg-white hover:shadow-lg transform hover:scale-105 transition-all duration-300 border border-gray-100 hover:border-gray-200">
+                    <div className="text-3xl group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
                     <div>
-                      <h4 className="mb-2 font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-700">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm leading-relaxed text-gray-600">{item.description}</p>
+                      <h4 className="font-bold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">{item.title}</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -219,70 +228,68 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="how-it-works" className="relative bg-white py-20">
+        <section id="how-it-works" className="py-20 bg-white relative">
           <div className="container max-w-6xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="mb-16 text-center">
+              className="text-center mb-16"
+            >
               <Badge className="mb-3" variant="outline">
                 CARA KERJA
               </Badge>
-              <h2 className="mb-4 font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4">
                 Bagaimana BISA Bekerja?
               </h2>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                Proses sederhana namun powerful yang menggunakan AI untuk mengidentifikasi dan
-                menyalurkan bantuan tepat sasaran
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Proses sederhana namun powerful yang menggunakan AI untuk mengidentifikasi dan menyalurkan bantuan tepat sasaran
               </p>
             </motion.div>
 
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  step: '01',
-                  title: 'Data Collection & Analysis',
-                  description:
-                    'AI mengumpulkan dan menganalisis data demografis, ekonomi, dan sosial dari berbagai sumber untuk mendapatkan gambaran komprehensif masyarakat',
-                  icon: '📊',
-                  color: 'from-blue-500 to-blue-700',
+                    step: "01",
+                    title: "Data Collection & Analysis",
+                    description: "AI mengumpulkan dan menganalisis data demografis, ekonomi, dan sosial dari berbagai sumber untuk mendapatkan gambaran komprehensif masyarakat",
+                    icon: "📊",
+                    color: "from-blue-500 to-blue-700"
                 },
                 {
-                  step: '02',
-                  title: 'Smart Targeting & Classification',
-                  description:
-                    'Algoritma machine learning mengklasifikasikan dan memprioritaskan calon penerima bantuan berdasarkan tingkat kebutuhan dan kriteria yang ditetapkan',
-                  icon: '🎯',
-                  color: 'from-purple-500 to-purple-700',
+                    step: "02", 
+                    title: "Smart Targeting & Classification",
+                    description: "Algoritma machine learning mengklasifikasikan dan memprioritaskan calon penerima bantuan berdasarkan tingkat kebutuhan dan kriteria yang ditetapkan",
+                    icon: "🎯",
+                    color: "from-purple-500 to-purple-700"
                 },
                 {
-                  step: '03',
-                  title: 'Distribution & Monitoring',
-                  description:
-                    'Sistem memantau proses distribusi secara real-time dan memberikan laporan transparan serta feedback untuk perbaikan berkelanjutan',
-                  icon: '📱',
-                  color: 'from-green-500 to-green-700',
-                },
-              ].map((item, index) => (
+                    step: "03",
+                    title: "Distribution & Monitoring",
+                    description: "Sistem memantau proses distribusi secara real-time dan memberikan laporan transparan serta feedback untuk perbaikan berkelanjutan",
+                    icon: "📱",
+                    color: "from-green-500 to-green-700"
+                }
+            ].map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   viewport={{ once: true }}
-                  className="relative">
+                  className="relative"
+                >
+                  
                   <div className="relative z-10 text-center">
-                    <div
-                      className={`mx-auto mb-6 h-16 w-16 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-lg font-bold text-white shadow-lg`}>
+                    <div className={`w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
                       {item.step}
                     </div>
-
-                    <div className="mb-4 text-4xl">{item.icon}</div>
-
-                    <h3 className="mb-4 text-xl font-bold text-gray-900">{item.title}</h3>
-                    <p className="leading-relaxed text-gray-600">{item.description}</p>
+                    
+                    <div className="text-4xl mb-4">{item.icon}</div>
+                  
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{item.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -293,13 +300,12 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
               viewport={{ once: true }}
-              className="mt-20 text-center">
-              <h3 className="mb-8 text-2xl font-bold text-gray-900">Teknologi yang Digunakan</h3>
-              <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
+              className="mt-20 text-center"
+            >
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">Teknologi yang Digunakan</h3>
+              <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
                 {techstack.map((tech, index) => (
-                  <div
-                    key={index}
-                    className="rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
+                  <div key={index} className="bg-gray-100 px-4 py-2 rounded-full text-sm font-medium text-gray-700">
                     {tech}
                   </div>
                 ))}
@@ -308,29 +314,33 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative py-20">
-          <div className="absolute inset-0 skew-y-3 transform bg-primary/5"></div>
+        <section className="py-20 relative">
+          <div className="absolute inset-0 bg-primary/5 transform skew-y-3"></div>
           <div className="container relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="mb-16 text-center">
+              className="text-center mb-16"
+            >
               <Badge className="mb-3" variant="outline">
                 TESTIMONIAL
               </Badge>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                 Dipercaya Berbagai Instansi Pemerintah
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-                Pengalaman nyata dari instansi pemerintah yang telah merasakan manfaat platform BISA
-                dalam distribusi bantuan sosial
+              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+                Pengalaman nyata dari instansi pemerintah yang telah merasakan manfaat platform BISA dalam distribusi bantuan sosial
               </p>
             </motion.div>
 
             <div className="relative px-8 md:px-12">
-              <InfiniteMovingCards items={socialAidTestimonials} direction="right" speed="slow" />
+              <InfiniteMovingCards
+                items={socialAidTestimonials}
+                direction="right"
+                speed="slow"
+              />
             </div>
 
             <motion.div
@@ -338,7 +348,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4">
+              className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
+            >
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -346,16 +357,12 @@ export default function Home() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="group text-center">
-                  <div className="transform rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                    <div className="mb-3 text-4xl transition-transform duration-300 group-hover:scale-110">
-                      {stat.icon}
-                    </div>
-                    <div
-                      className={`bg-gradient-to-r text-4xl font-bold ${stat.color} mb-2 bg-clip-text text-transparent`}>
-                      {stat.number}
-                    </div>
-                    <div className="text-sm font-medium text-gray-600">{stat.label}</div>
+                  className="text-center group"
+                >
+                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-100">
+                    <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
+                    <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>{stat.number}</div>
+                    <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
                   </div>
                 </motion.div>
               ))}
@@ -368,70 +375,69 @@ export default function Home() {
         <FaqSection />
 
         {/* Contact Section */}
-        <section
-          id="contact"
-          className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50 py-20">
+        <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
           {/* Background decorations */}
-          <div className="absolute left-0 top-0 h-full w-full">
-            <div className="absolute left-10 top-20 h-64 w-64 animate-pulse rounded-full bg-blue-200 opacity-20 mix-blend-multiply blur-xl filter"></div>
-            <div className="absolute bottom-20 right-10 h-64 w-64 animate-pulse rounded-full bg-green-200 opacity-20 mix-blend-multiply blur-xl filter delay-1000"></div>
+          <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute top-20 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+            <div className="absolute bottom-20 right-10 w-64 h-64 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
           </div>
-
-          <div className="container relative z-10 max-w-6xl">
+          
+          <div className="container max-w-6xl relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="mb-16 text-center">
+              className="text-center mb-16"
+            >
               <Badge className="mb-3" variant="outline">
                 KONTAK KAMI
               </Badge>
               <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                 Mari Berkolaborasi untuk Indonesia yang Lebih Baik
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-                Hubungi tim kami untuk konsultasi, demo platform, atau kerjasama implementasi BISA
-                di instansi Anda
+              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+                Hubungi tim kami untuk konsultasi, demo platform, atau kerjasama implementasi BISA di instansi Anda
               </p>
             </motion.div>
 
-            <div className="grid items-start gap-12 lg:grid-cols-2">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Contact Information */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="space-y-8">
+                className="space-y-8"
+              >
                 <div>
-                  <h3 className="mb-6 text-2xl font-bold text-gray-900">Informasi Kontak</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Informasi Kontak</h3>
                   <div className="space-y-6">
                     {[
                       {
-                        icon: '📧',
-                        title: 'Email',
-                        content: 'info@bisa.go.id',
-                        subtitle: 'Tim akan merespons dalam 24 jam',
+                        icon: "📧",
+                        title: "Email",
+                        content: "info@bisa.go.id",
+                        subtitle: "Tim akan merespons dalam 24 jam"
                       },
                       {
-                        icon: '📞',
-                        title: 'Telepon',
-                        content: '+62 21 1234 5678',
-                        subtitle: 'Senin - Jumat, 08:00 - 17:00 WIB',
+                        icon: "📞",
+                        title: "Telepon",
+                        content: "+62 21 1234 5678",
+                        subtitle: "Senin - Jumat, 08:00 - 17:00 WIB"
                       },
                       {
-                        icon: '📍',
-                        title: 'Alamat',
-                        content: 'Gedung Kementerian Sosial RI',
-                        subtitle: 'Jl. Saharjo No.31, Jakarta Selatan 12950',
+                        icon: "📍",
+                        title: "Alamat",
+                        content: "Gedung Kementerian Sosial RI",
+                        subtitle: "Jl. Saharjo No.31, Jakarta Selatan 12950"
                       },
                       {
-                        icon: '🤝',
-                        title: 'Partnership',
-                        content: 'partnership@bisa.go.id',
-                        subtitle: 'Untuk kerjasama dan kemitraan strategis',
-                      },
+                        icon: "🤝",
+                        title: "Partnership",
+                        content: "partnership@bisa.go.id",
+                        subtitle: "Untuk kerjasama dan kemitraan strategis"
+                      }
                     ].map((item, index) => (
                       <motion.div
                         key={index}
@@ -439,14 +445,15 @@ export default function Home() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                         viewport={{ once: true }}
-                        className="group flex items-start space-x-4">
-                        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-blue-100 transition-colors duration-300 group-hover:bg-blue-200">
+                        className="flex items-start space-x-4 group"
+                      >
+                        <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition-colors duration-300">
                           <span className="text-2xl">{item.icon}</span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="mb-1 font-semibold text-gray-900">{item.title}</h4>
-                          <p className="font-medium text-blue-600">{item.content}</p>
-                          <p className="mt-1 text-sm text-gray-500">{item.subtitle}</p>
+                          <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
+                          <p className="text-blue-600 font-medium">{item.content}</p>
+                          <p className="text-sm text-gray-500 mt-1">{item.subtitle}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -458,8 +465,9 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 }}
                   viewport={{ once: true }}
-                  className="rounded-2xl border border-gray-100 bg-white/80 p-6 shadow-lg backdrop-blur-sm">
-                  <h4 className="mb-4 font-bold text-gray-900">Tim Dukungan 24/7</h4>
+                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-100"
+                >
+                  <h4 className="font-bold text-gray-900 mb-4">Tim Dukungan 24/7</h4>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-blue-600">&lt; 2h</div>
@@ -477,73 +485,74 @@ export default function Home() {
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                viewport={{ once: true }}>
-                <Card className="border-0 bg-white/90 shadow-2xl backdrop-blur-sm">
+                viewport={{ once: true }}
+              >
+                <Card className="border-0 shadow-2xl bg-white/90 backdrop-blur-sm">
                   <CardContent className="p-8">
-                    <h3 className="mb-6 text-2xl font-bold text-gray-900">Kirim Pesan</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6">Kirim Pesan</h3>
                     <form className="space-y-6">
-                      <div className="grid gap-4 md:grid-cols-2">
+                      <div className="grid md:grid-cols-2 gap-4">
                         <div>
-                          <label className="mb-2 block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
                             Nama Lengkap *
                           </label>
                           <input
                             type="text"
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                             placeholder="Masukkan nama lengkap"
                           />
                         </div>
                         <div>
-                          <label className="mb-2 block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
                             Jabatan
                           </label>
                           <input
                             type="text"
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                             placeholder="Jabatan Anda"
                           />
                         </div>
                       </div>
-
-                      <div className="grid gap-4 md:grid-cols-2">
+                      
+                      <div className="grid md:grid-cols-2 gap-4">
                         <div>
-                          <label className="mb-2 block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
                             Email *
                           </label>
                           <input
                             type="email"
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                             placeholder="email@instansi.go.id"
                           />
                         </div>
                         <div>
-                          <label className="mb-2 block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
                             Nomor Telepon
                           </label>
                           <input
                             type="tel"
-                            className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                             placeholder="+62 812 3456 7890"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="mb-2 block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                           Instansi/Organisasi *
                         </label>
                         <input
                           type="text"
-                          className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                           placeholder="Nama instansi/organisasi"
                         />
                       </div>
 
                       <div>
-                        <label className="mb-2 block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                           Jenis Kebutuhan
                         </label>
-                        <select className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-blue-500">
+                        <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                           <option value="">Pilih jenis kebutuhan</option>
                           <option value="demo">Request Demo Platform</option>
                           <option value="implementation">Implementasi BISA</option>
@@ -555,27 +564,28 @@ export default function Home() {
                       </div>
 
                       <div>
-                        <label className="mb-2 block text-sm font-medium text-gray-700">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
                           Pesan *
                         </label>
                         <textarea
                           rows={5}
-                          className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 transition-all duration-200 focus:border-transparent focus:ring-2 focus:ring-blue-500"
-                          placeholder="Jelaskan kebutuhan Anda secara detail..."></textarea>
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                          placeholder="Jelaskan kebutuhan Anda secara detail..."
+                        ></textarea>
                       </div>
 
                       <div className="flex items-center space-x-3">
                         <input
                           type="checkbox"
                           id="privacy"
-                          className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                         />
                         <label htmlFor="privacy" className="text-sm text-gray-600">
-                          Saya setuju dengan{' '}
+                          Saya setuju dengan{" "}
                           <Link href="#privacy" className="text-blue-600 hover:underline">
                             Kebijakan Privasi
-                          </Link>{' '}
-                          dan{' '}
+                          </Link>{" "}
+                          dan{" "}
                           <Link href="#terms" className="text-blue-600 hover:underline">
                             Syarat & Ketentuan
                           </Link>
@@ -584,9 +594,10 @@ export default function Home() {
 
                       <Button
                         type="submit"
-                        className="h-12 w-full transform rounded-lg bg-[#3E9EDB] font-medium text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2E7BC6] hover:shadow-xl">
+                        className="w-full h-12 bg-[#3E9EDB] hover:bg-[#2E7BC6] text-white font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                      >
                         Kirim Pesan
-                        <RiArrowRightLine className="ml-2 h-5 w-5" />
+                        <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
                     </form>
                   </CardContent>
@@ -599,14 +610,14 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
               viewport={{ once: true }}
-              className="mt-16 text-center">
-              <div className="rounded-2xl border border-gray-100 bg-white/80 p-8 shadow-lg backdrop-blur-sm">
-                <h4 className="mb-4 text-xl font-bold text-gray-900">
+              className="mt-16 text-center"
+            >
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-100">
+                <h4 className="text-xl font-bold text-gray-900 mb-4">
                   🚀 Siap untuk Transformasi Digital?
                 </h4>
-                <p className="mb-6 text-gray-600">
-                  Bergabunglah dengan 50+ instansi pemerintah yang telah mempercayai BISA untuk
-                  distribusi bantuan sosial yang lebih efektif
+                <p className="text-gray-600 mb-6">
+                  Bergabunglah dengan 50+ instansi pemerintah yang telah mempercayai BISA untuk distribusi bantuan sosial yang lebih efektif
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Badge variant="outline" className="px-4 py-2">
@@ -634,7 +645,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden rounded-2xl bg-primary/5 p-8 md:p-12 lg:p-16">
+              className="rounded-2xl bg-primary/5 p-8 md:p-12 lg:p-16 relative overflow-hidden"
+            >
               <BackgroundGradient
                 animate={false}
                 className="opacity-30"
@@ -645,16 +657,16 @@ export default function Home() {
                   Siap mengoptimalkan distribusi bantuan sosial Anda?
                 </h2>
                 <p className="mt-4 text-lg text-muted-foreground">
-                  Bergabunglah dengan puluhan instansi pemerintah yang telah merasakan efektivitas
-                  platform BISA dalam menyalurkan bantuan tepat sasaran.
+                  Bergabunglah dengan puluhan instansi pemerintah yang telah merasakan efektivitas platform BISA dalam menyalurkan bantuan tepat sasaran.
                 </p>
-                <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                   <Link href="/dashboard">
-                    <ShineButton
-                      size="lg"
-                      className="h-14 transform border-0 bg-[#3E9EDB] px-10 text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#2E7BC6] hover:shadow-xl">
+                    <ShineButton 
+                      size="lg" 
+                      className="h-14 px-10 text-white bg-[#3E9EDB] hover:bg-[#2E7BC6] border-0 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                    >
                       Mulai Sekarang
-                      <RiArrowRightLine className="ml-2 h-5 w-5" />
+                      <ArrowRight className="ml-2 h-5 w-5" />
                     </ShineButton>
                   </Link>
                 </div>

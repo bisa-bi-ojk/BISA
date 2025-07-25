@@ -12,6 +12,10 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+# Install pnpm
+ARG PNPM_VERSION=10.12.1
+RUN npm install -g pnpm@$PNPM_VERSION
+
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -21,8 +25,8 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
 # Install node modules
-COPY package-lock.json package.json ./
-RUN npm ci --include=dev
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --prod=false
 
 # Copy application code
 COPY . .
@@ -31,7 +35,7 @@ COPY . .
 RUN npx next build --experimental-build-mode compile
 
 # Remove development dependencies
-RUN npm prune --omit=dev
+RUN pnpm prune --prod
 
 
 # Final stage for app image
@@ -48,4 +52,4 @@ ENTRYPOINT [ "/app/docker-entrypoint.js" ]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+CMD [ "pnpm", "run", "start" ]

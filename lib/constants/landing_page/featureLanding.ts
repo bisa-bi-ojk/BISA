@@ -1,5 +1,5 @@
-import type { LucideIcon } from 'lucide-react';
-import { Target, Eye, BarChart3, Users } from 'lucide-react';
+import type { LucideIcon } from "lucide-react";
+import { BarChart3, Eye, Target, Users } from "lucide-react";
 
 export interface Feature {
   icon: LucideIcon;
@@ -12,34 +12,34 @@ export interface Feature {
 export const features: Feature[] = [
   {
     icon: Target,
-    title: 'Penargetan Akurat',
+    title: "Penargetan Akurat",
     description:
-      'AI menganalisis data untuk memastikan bantuan tepat sasaran sesuai kriteria penerima.',
-    color: 'bg-green-100',
-    stats: '95% Akurasi',
+      "AI menganalisis data untuk memastikan bantuan tepat sasaran sesuai kriteria penerima.",
+    color: "bg-green-100",
+    stats: "95% Akurasi",
   },
   {
     icon: Eye,
-    title: 'Pemantauan Waktu Nyata',
+    title: "Pemantauan Waktu Nyata",
     description:
-      'Sistem pelacakan waktu nyata untuk memantau distribusi bantuan dari awal hingga akhir dengan transparansi penuh.',
-    color: 'bg-blue-100',
-    stats: 'Pemantauan 24/7',
+      "Sistem pelacakan waktu nyata untuk memantau distribusi bantuan dari awal hingga akhir dengan transparansi penuh.",
+    color: "bg-blue-100",
+    stats: "Pemantauan 24/7",
   },
   {
     icon: BarChart3,
-    title: 'Analisis Mendalam',
+    title: "Analisis Mendalam",
     description:
-      'Dashboard analitik komprehensif untuk evaluasi efektivitas program bantuan sosial dan prediksi kebutuhan.',
-    color: 'bg-blue-100',
-    stats: '20+ Metrik',
+      "Dashboard analitik komprehensif untuk evaluasi efektivitas program bantuan sosial dan prediksi kebutuhan.",
+    color: "bg-blue-100",
+    stats: "20+ Metrik",
   },
   {
     icon: Users,
-    title: 'Kolaborasi Multi-Instansi',
+    title: "Kolaborasi Multi-Instansi",
     description:
-      'Platform terintegrasi untuk koordinasi antar instansi dalam pengelolaan bantuan dengan alur kerja yang efisien.',
-    color: 'bg-green-100',
-    stats: 'Akses Multi-Level',
+      "Platform terintegrasi untuk koordinasi antar instansi dalam pengelolaan bantuan dengan alur kerja yang efisien.",
+    color: "bg-green-100",
+    stats: "Akses Multi-Level",
   },
 ];
