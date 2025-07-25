@@ -33,9 +33,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const refreshUser = async () => {
-    // Only check auth on client side
-    if (typeof window === 'undefined') {
-      setIsLoading(false);
+    // Only check auth on client side after hydration
+    if (typeof window === 'undefined' || !isMounted) {
       return;
     }
 
@@ -69,8 +68,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     setIsMounted(true);
-    refreshUser();
   }, []);
+
+  useEffect(() => {
+    if (isMounted) {
+      refreshUser();
+    }
+  }, [isMounted]);
 
   const value: AuthContextType = {
     user,
