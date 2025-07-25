@@ -49,4 +49,4 @@ ENTRYPOINT [ "/app/docker-entrypoint.js" ]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "pnpm", "run", "start" ]
+CMD [ "pnpm", "run", "start", "--", "-p", "3000", "-H", "0.0.0.0" ]
