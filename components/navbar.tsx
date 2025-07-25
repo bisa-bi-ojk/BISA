@@ -31,13 +31,12 @@ export function Navbar() {
       logout();
     } catch (error) {
       console.error('Logout error:', error);
-      // Even if API fails, logout locally
       logout();
     }
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/80 dark:border-border">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/80 dark:border-border sticky top-0 z-50 w-full border-b shadow-sm backdrop-blur-md">
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-6">
         <div className="flex items-center gap-3">
           <Link href="/">
@@ -50,8 +49,8 @@ export function Navbar() {
             />
           </Link>
           <div className="hidden sm:block">
-            <h2 className="text-xl font-bold text-foreground">BISA</h2>
-            <p className="text-xs text-muted-foreground">Bantuan Inklusif & Sasaran Akurat</p>
+            <h2 className="text-foreground text-xl font-bold">BISA</h2>
+            <p className="text-muted-foreground text-xs">Bantuan Inklusif & Sasaran Akurat</p>
           </div>
         </div>{' '}
         <div className="flex items-center gap-6">
@@ -61,7 +60,7 @@ export function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
-                className="group relative whitespace-nowrap text-sm font-medium text-foreground transition-colors duration-200 hover:text-[#3E9EDB]">
+                className="group text-foreground relative text-sm font-medium whitespace-nowrap transition-colors duration-200 hover:text-[#3E9EDB]">
                 {item.name}
                 <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-[#3E9EDB] transition-all duration-300 group-hover:w-full"></span>
               </Link>
@@ -71,11 +70,11 @@ export function Navbar() {
           {/* Desktop Auth Section */}
           <div className="hidden items-center gap-4 sm:flex">
             {!isMounted || isLoading ? (
-              <div className="h-10 w-20 animate-pulse rounded-lg bg-muted"></div>
+              <div className="bg-muted h-10 w-20 animate-pulse rounded-lg"></div>
             ) : isLoggedIn ? (
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
-                  <User className="h-4 w-4 text-muted-foreground" />
+                <div className="bg-muted flex items-center gap-2 rounded-lg px-3 py-2">
+                  <User className="text-muted-foreground h-4 w-4" />
                   <span className="text-sm font-medium">{user?.fullName}</span>
                 </div>
                 <Button
@@ -97,7 +96,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="rounded-lg p-2 transition-colors hover:bg-muted md:hidden"
+            className="hover:bg-muted rounded-lg p-2 transition-colors md:hidden"
             aria-label="Toggle mobile menu">
             {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -110,7 +109,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-t border-border bg-background shadow-lg dark:shadow-none md:hidden">
+            className="border-border bg-background border-t shadow-lg md:hidden dark:shadow-none">
             <div className="container space-y-3 py-4">
               {navItems.map((item, index) => (
                 <motion.div
@@ -121,7 +120,7 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={(e) => handleSmoothScroll(e, item.href)}
-                    className="block rounded-lg px-4 py-2 text-foreground transition-colors hover:bg-muted hover:text-[#3E9EDB]">
+                    className="text-foreground hover:bg-muted block rounded-lg px-4 py-2 transition-colors hover:text-[#3E9EDB]">
                     {item.name}
                   </Link>
                 </motion.div>
@@ -130,13 +129,13 @@ export function Navbar() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
-                className="border-t border-border pt-3">
+                className="border-border border-t pt-3">
                 {!isMounted || isLoading ? (
-                  <div className="h-12 w-full animate-pulse rounded-lg bg-muted"></div>
+                  <div className="bg-muted h-12 w-full animate-pulse rounded-lg"></div>
                 ) : isLoggedIn ? (
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2 rounded-lg bg-muted px-4 py-2">
-                      <User className="h-4 w-4 text-muted-foreground" />
+                    <div className="bg-muted flex items-center gap-2 rounded-lg px-4 py-2">
+                      <User className="text-muted-foreground h-4 w-4" />
                       <span className="text-sm font-medium">{user?.fullName}</span>
                     </div>
                     <Button

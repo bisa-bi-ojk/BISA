@@ -33,7 +33,6 @@ export interface User {
   emailVerified: boolean;
   createdAt: string;
   updatedAt?: string;
-  // Additional profile fields
   address?: string;
   dateOfBirth?: string;
   occupation?: string;
@@ -86,8 +85,7 @@ const apiRequest = async <T>(endpoint: string, options: RequestInit = {}): Promi
       ...defaultHeaders,
       ...options.headers,
     },
-    // Add timeout for better error handling
-    signal: AbortSignal.timeout(10000), // 10 second timeout
+    signal: AbortSignal.timeout(10000),
   };
 
   try {
@@ -105,7 +103,6 @@ const apiRequest = async <T>(endpoint: string, options: RequestInit = {}): Promi
     return response.text() as T;
   } catch (error) {
     if (error instanceof Error) {
-      // Handle network errors more gracefully
       if (error.name === 'AbortError') {
         throw new Error('Request timeout - please check your connection');
       }
@@ -190,7 +187,6 @@ export const getProfile = async (): Promise<User> => {
       },
     });
   } catch (error) {
-    // If profile fetch fails, remove the invalid token
     removeAuthToken();
     throw error;
   }

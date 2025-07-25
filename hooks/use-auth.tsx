@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const refreshUser = async () => {
-    // Only check auth on client side after hydration
     if (typeof window === 'undefined' || !isMounted) {
       return;
     }
@@ -49,7 +48,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(userData);
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
-      // If profile fetch fails, likely token is invalid or network error
       removeAuthToken();
       setUser(null);
     } finally {

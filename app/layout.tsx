@@ -1,18 +1,21 @@
-import { Navbar } from "@/components/navbar";
-import { Toaster } from "@/components/ui/sonner";
-import { AuthProvider } from "@/hooks/use-auth";
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Navbar } from '@/components/navbar';
+import { Toaster } from '@/components/ui/sonner';
+import { AuthProvider } from '@/hooks/use-auth';
+import { cn } from '@/lib/utils';
+import type { Metadata } from 'next';
+import { Montserrat, Poppins } from 'next/font/google';
+import './globals.css';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const fontSans = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-sans',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const fontHeading = Montserrat({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  variable: '--font-heading',
 });
 
 export const metadata: Metadata = {
@@ -23,9 +26,9 @@ export const metadata: Metadata = {
   applicationName: 'BISA',
   authors: [
     { name: 'Anthony Edbert Feriyanto', url: 'https://linkedin.com/in/anthony-edbert' },
-    { name: 'Darren Aldrich',          url: 'https://linkedin.com/in/dardrich' },
-    { name: 'Kaindra Rizq Sachio',     url: 'https://linkedin.com/in/kaindrars' },
-    { name: 'Muhammad Fazil Tirtana',  url: 'https://linkedin.com/in/faziltirtana' },
+    { name: 'Darren Aldrich', url: 'https://linkedin.com/in/dardrich' },
+    { name: 'Kaindra Rizq Sachio', url: 'https://linkedin.com/in/kaindrars' },
+    { name: 'Muhammad Fazil Tirtana', url: 'https://linkedin.com/in/faziltirtana' },
   ],
   keywords: [
     'bantuan sosial',
@@ -88,8 +91,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={cn(
+          'bg-background min-h-screen font-sans antialiased',
+          fontSans.variable,
+          fontHeading.variable,
+        )}>
         <AuthProvider>
           <Navbar />
           {children}
